@@ -1,0 +1,1036 @@
+id,Problem,Rationale,correct,annotated_formula,linear_formula,category
+Good Grid,"Suppose that two integers a and b are uniformly at random selected from S={-10, -9, ..., 9, 10}. Find the probability that max(0,a) = min(0,b)","For the equation max(0,a) = min(0,b) to be true, we need to determine when these two expressions are equal.
+
+Let's analyze what max(0,a) and min(0,b) mean:
+- max(0,a) equals a if a > 0, and equals 0 if a ≤ 0
+- min(0,b) equals b if b < 0, and equals 0 if b ≥ 0
+
+For these expressions to be equal, we need max(0,a) = min(0,b) = 0, which happens when:
+- a ≤ 0 (so that max(0,a) = 0)
+- b ≥ 0 (so that min(0,b) = 0)
+
+The set S = {-10, -9, ..., 9, 10} contains 21 integers. Since a and b are selected independently and uniformly at random from S, the total number of possible outcomes is 21² = 441.
+The number of favorable outcomes is 11 × 11 = 121 (the number of ways to select a ≤ 0 and b ≥ 0).
+
+Therefore, the probability is 121/441.",121/441,,,probability
+Dot Placement,You place three dots along the edges of an octagon at random. What is the probability that all three dots lie on distinct edges of the octagon?,"Let's consider placing each dot one by one. The first dot will be placed on a distinct edge of the octagon by default.
+
+For the second dot to be placed on a distinct edge it must be placed on any edge other than the edge upon which the first dot was placed. Since there are a total of 8 edges, this leaves us with 7 choices for edges to place the second dot.
+
+The final dot must be placed on any edge other than the first two edges upon which the dots were placed. This leaves us with 6 choices for edges.
+
+Combining these three facts together, we get that the total probability that all three dots lie on distinct edges is 1 × 7/8 × 6/8 = 21/32",21/32,,,probability
+Bolt Variance,"A manufacturer produces nuts and bolts. A random sample of twelve bolts returned a sample variance of .0003, while a random sample of twelve bolts from a competitor returned a sample variance of .0001. We wish to test if there is sufficient data to indicate a smaller variation in bolt diameter from the competitor. What is the value of the relevant test statistic? Assume independence, variance homogeneity, and that diameter variance is approximately normally distributed.","To test whether there is sufficient evidence to indicate a smaller variation in bolt diameter from the competitor, we use an F-test for variances. The test statistic for the F-test is given by:
+
+F = s₁²/s₂² = 0.0003/0.0001 = 3",3,,,probability
+Sly Cat,"You have a pet cat that has a sly tendency to leave your house while you are away. Every day while you are out, you call your neighbor to ask them whether your cat has left your house. Your neighbor always responds with a yes or a no, but sometimes they lie, saying that your cat left when it has not, or vice versa.
+
+Let's say that the probability that your cat leaves the house is 0.001 and the probability that your neighbor lies is 0.1 (independent of whether your cat actually left the house or not).
+
+What is the probability that your cat left the house given that your neighbor says it did so?","Let's begin by defining a few random variables.
+
+C = your cat left the house
+N = your neighbor says that your cat left the house
+L = your neighbor lies
+
+From the problem statement we know that P(C) = 0.001 and P(L) = 0.1. Our objective is to find P(C|N) - the probability that your cat left the house given your neighbor said it did so.
+
+We can apply Bayes' Theorem here:
+
+P(C|N) = P(N|C) * P(C) / P(N)
+
+The probability that your neighbor says that the cat left the house when it did, is the same as the probability that your neighbor told the truth, which equals 1 - P(L) = 1 - 0.1 = 0.9.
+
+Next, using the law of total probability we can decompose P(N) into
+
+P(N) = P(N|C) * P(C) + P(N|¬C) * P(¬C)
+     = 0.9 * 0.001 + 0.1 * 0.999
+     = 0.1008
+
+Plugging these values back into the original equation we get:
+
+P(C|N) = 0.9 * 0.001 / 0.1008 = 0.0089",0.0089,,,probability
+Joint Model Evaluation,"Using OLS, we regress y onto X₁ and find that the model has an R² of 0.45. We also regress y onto X₂ and find that the model has an R² of 0.3. Let [min, max] denote the lower and upper bound of R² of a model which regresses y onto X₁, X₂. Find both the min and max R² values for the new model.","Recall that R² quantifies the explanatory power of the model - the variation in the dependent variable (y) that can be explained by the independent variables (X₁, X₂). When we add a new variable to a regression model, the R² value can never decrease; rather, it can either increase or stay the same. It will stay the same in the case that both variables are perfectly collinear and increase if there is some variation in y that is explained by one variable and not the other.
+
+Based on this, the minimum R² of the combined regression will be 0.45 and the maximum R² of the combined regression will be 0.75.","[0.45, 0.75]",,,probability
+Stamp Collector,"A stamp collector is attempting to collect 4 different stamp types. If she is equally likely to find each type of stamp, what is the expected number of stamps that she would have to find in order to find three different unique stamp types?","We'll break the process into three phases:
+
+1. Phase 1: The collector finds the first unique stamp.
+2. Phase 2: The collector finds the second unique stamp.
+3. Phase 3: The collector finds the third unique stamp.
+
+We will calculate the expected number of stamps needed in each phase and then sum them up.
+
+The first stamp will always be a new type, so the expected number of stamps to find the first unique stamp is: E₁ = 1
+
+Once the collector has one unique stamp, the probability of finding a new unique stamp on the next try is 3/4 because 3 out of the 4 stamp types remain undiscovered. The expected number of trials to get a new stamp follows a geometric distribution with success probability 3/4. The expected number of trials to get a new type in this phase is:
+
+E₂ = 1/(3/4) = 4/3
+
+Now the collector has 2 unique stamps. The probability of finding a third unique stamp is 2/4 = 1/2, since 2 out of the 4 types remained undiscovered. The expected number of trials to get a new type in this phase is:
+
+E₃ = 1/(1/2) = 2
+
+The total expected number of stamps needed to find three unique types is:
+E = E₁ + E₂ + E₃ = 1 + 4/3 + 2 = 4 + 1/3 = 13/3",13/3,,,probability
+Restaurant Meal,"Three friends all decide to visit a popular restaurant. If each friend randomly and independently chooses to go to either breakfast, lunch, or dinner, what is the probability that all three mealtimes will be selected?","Each friend has 3 options (breakfast, lunch, or dinner). Since the choices are independent, the total number of possible outcomes (ways the three friends can choose mealtimes) is 3³ = 27.
+
+For the favorable outcomes, each friend must choose a different mealtime. We need to count how many ways this can happen.
+
+1. The first friend can choose any of the 3 mealtimes.
+2. The second friend must choose a different mealtime from the first, so they have 2 choices.
+3. The third friend must choose the remaining mealtime, so they have 1 choice.
+
+The number of favorable outcomes is 3 × 2 × 1 = 6.
+
+The probability that all three friends choose different mealtimes is the ratio of favorable outcomes to total outcomes: 6/27 = 2/9",2/9,,,probability
+Quilt Shop,"A quilt shop sells three different colored quilts: blue, red, and green. Of the first 1000 quilts sold, 400 were green. Calculate the appropriate test statistic to determine if customers have a preference for green quilts. Assume random sampling, variance homogeneity, and that preference is approximately normally distributed.","We are testing the following hypotheses:
+
+H₀: p = 1/3, Hₐ: p > 1/3
+
+The sample proportion for n = 1000 is:
+
+p̂ = 400/1000 = 0.4
+
+The Z statistic can be calculated as:
+
+Z = (p̂ - p)/√(p(1-p)/n) = (0.40 - 1/3)/√((1/3)(1-1/3)/1000) ≈ 4.47",4.47,,,probability
+Sample Size for Restaurant Test,"The manager of a large Michelin star restaurant is seeking to detect a difference equal to one dish in the average number of meals cooked by his chefs. He runs a statistical test with the null hypothesis H0: μ=13 Hα: μ=14. Assuming σ²=4, what sample size will ensure that alpha=beta=0.05?","For this question, recall the equation for calculating the sample size for an upper-tail α-level test is:
+
+n = (Zα + Zβ)² · σ²/(μ0 - μa)²
+
+Since we know that α = β = 0.05, it is also the case that Zα = Zβ = 1.645. Plugging this into the equation above gives us:
+
+n = (1.645 + 1.645)² × 4/(13 - 14)² ≈ 43.29
+
+The manager will need n = 44 observations in order to conduct a test with 95% power.",44,,,probability
+Type II Error in Restaurant,"The manager of a large Michelin star restaurant is seeking to detect a difference equal to one dish in the average number of meals cooked by his chefs. To check this, he records the number of dishes that 49 make on a given week. He finds the variance of the number of dishes cooked per chef to be 4. He runs a statistical test with alpha=0.05 to test the null hypothesis H0: μ=13 Hα: μ >13. What's the probability of a Type II error?","To solve this question, we'll begin by computing the rejection region. Since the sample size is reasonably large (n > 30) we can use the z-statistic.
+
+z = (x̄ - μ)/(σ/√n) = (x̄ - 13)/(2/√49) > 1.645 ⇒ x̄ > 13.47
+
+Next we want to calculate the probability of a type 2 error (commonly known as β). Recall that β is simply the probability that we incorrectly fail to reject the null hypothesis.
+
+β = P(Fail to reject H₀ | Hₐ is true) = P(x̄ ≤ 13.47 | μ = 14)
+
+= P(Z ≤ (13.47 - 14)/(2/√49)) = P(Z ≤ -1.855)=0.030",0.030,,,probability
+Sumo Wrestlers,"Two Sumo wrestlers (A and B) have one wrestling match each day for N days. Let Xi denote the outcome of a wrestling match on day i for A (0 if A lost and 1 if A won) and let X̄n denote the fraction of matches that A won.
+
+Assume that each match is independent of the other matches and let p denote the probability that sumo A wins the match. If p = 0.63, and σ = 0.025 how many matches must the sumo wrestlers have in order for P(0.57 ≤ X̄n ≤ 0.69) > 0.88.","The solution uses Chebyshev's inequality, which states:
+P(|X - μ| ≥ kσ) ≤ 1/k²
+Where k = (X - μ)/σ
+This means the probability that X is within k standard deviations of the mean is less than or equal to 1/(Standard Deviations from Mean)².
+The solution steps are:
+Calculate k = (0.69-0.63)/0.025 = 2.4
+Plug this back into the equation:
+P(|X̄ - 0.63| ≥ 2.4 · 0.025) ≤ 1/(0.025)²
+Rewrite the probability we want:
+P(0.57 ≤ X̄ₙ ≤ 0.69) = P(|X̄ - 0.63| ≤ 2.4 · 0.025)
+P(0.57 ≤ X̄ₙ ≤ 0.69) = P(|X̄ - 0.63| ≤ 0.06)
+P(0.57 ≤ X̄ₙ ≤ 0.69) = 1 - P(|X̄ - 0.63| > 0.06)
+Apply Chebyshev's inequality:
+P(0.57 ≤ X̄ₙ ≤ 0.69) ≥ 1 - 1/(0.025n(0.06²))
+Set this greater than 0.88:
+0.88 ≥ 1 - 1/(0.025n(0.06²))
+Solve for n: n ≥ 0.12/(0.025(0.06²)) ~ 1333.3",1334,,,probability
+Soccer Match,"Two teams, A and B, played soccer twice in two independent matches. The average accuracy of shots taken by team A in match 1 was greater than the average accuracy of shots taken by team B in match 1.
+
+The average accuracy of team A in match 2 was also greater than the average accuracy of team B in match 2.
+
+Based on this data, can we conclude that the average accuracy of team A is greater than the average accuracy of team B in the two matches together? If yes, explain why. If the answer is no, provide a counter-example.","We can not conclude that the average accuracy of the two matches together is greater for team A than for team B. The reason for this is due to phenomenon known as Simpson's paradox in which a trend appears in several groups of data but disappears or reverses when the groups are combined.
+
+Let's consider the following example. In match 1, team A goes 1/100 giving them an accuracy of 1% and team B goes 0/1, giving them an accuracy of 0%. In match 2, team A goes 1/1, giving them an accuracy of 100%, and team B goes 99/100 giving them an accuracy of 99%.
+
+In each individual game, team A has a better accuracy than team B, but overall team A has an accuracy of (1 + 1)/(100 + 1) = 2/101 = ~1.98% and team B has an overall accuracy of (0 + 99)/(1 + 100) = 99/101 = ~98%.","No, Simpson's paradox",,,probability
+Sample Duplication,You are in a research lab in a tropical rainforest and are studying the relationship between temperature and the growth of Cacao trees. Assume you have 50 data points and find a correlation coefficient of 0.75. You decide to duplicate your 50 data points and re-calculate the correlation coefficient. How much did the correlation increase?,"Recall that the equation for correlation is defined as:
+
+r = ∑(xᵢ - x̄)(yᵢ - ȳ) / √[∑(xᵢ - x̄)² ∑(yᵢ - ȳ)²]
+
+Notice that doubling the original sample will not change the value of ȳ or x̄ and therefore will not change the correlation coefficient. Therefore, the correlation will not increase.",0,,,probability
+Rainbow Trains,"There are three train cars: a blue one, a red one, and a green one. This train has a conductor whose job it is to disconnect the train cars in the back and put them in the front. They can do this as many or as few times as they want. If the three train cars are randomly ordered, what is the probability that the conductor can rearrange it into rainbow order? (Note: Here, rainbow order means red, then green, then blue)","Let us denote the colors 1, 2, and 3 such that a correct rainbow ordering of the cars is 123. There are 3! ways to order the three cars, and of those orders, only three preserve the rainbow order of the cars: 123, 231, and 312. Thus, the probability that the conductor can rearrange the order of the cars into rainbow order is:
+
+3/3! = 1/2",1/2,,,probability
+Sequential Paris,Sam has a standard 52 deck of cards. He pulls two cards and they happen to share the same rank. What is the probability that the next two cards he draws also share the same rank?,"If Sam pulls two more cards of the same rank that he just pulled, there are (2 choose 2) ways to do this.
+
+If he draws two cards of the same rank but different from his last pair, there are (4 choose 2) ways of accomplishing this. Of the ranks, 12 of them are different from his last pull.
+
+Given that there are 50 remaining cards in the deck and Sam will pull 2 more, there exist a total of (50 choose 2) possible drawings.
+
+So we get:
+
+(1 + 12(4 choose 2))/(50 choose 2) = 73/1225",73/1225,,,probability
+Find the Variance,What is the variance of a uniform random variable X with probability density function f(x)=1 for 0<=x<=1 and zero elsewhere,"The formula for Var(X) is E(X²) - E(X)²
+
+To find E(X²), we can take the sum of all f(x) · X². The integral is a useful tool to use when summing quantities over a continuous distribution.
+
+E(X²) = ∫₀¹ f(x)X²dx = ∫₀¹ 1 · X²dx = 1/3 X³|₀¹ = 1/3
+
+We can compute E(X)² in a similar way buy summing f(x)X and then squaring that result, but a simpler way would be to realize that the average result of a uniform distribution will just be its midpoint. Hence, E(X)² = (1/2)² = 1/4
+
+Var(X) = 1/3 - 1/4 = 1/12",1/12,,,probability
+Same Birthday,"If you have N people in a room, what is the likelihood that someone has the same birthday as you?","For this question, we will first compute the probability that nobody has the same birthday as us and then subtract it from 1. For computing the probability that nobody has the same birthday as us, there are 364^(N-1) possible samples of birthdays excluding our own. There are 365^(N-1) possible ways for the other guests to have birthdays. Our answer is: 1 - 364^(N-1)/365^(N-1)",1 - 364^(N-1)/365^(N-1),,,probability
+Same Birthday,"If you have N<=365 people in a room, what is the likelihood that at least 2 of them have the same birthday?","To solve this question, we can leverage the complement rule in probability. We must first calculate the probability that everyone has a unique birthday and then subtract it from one. There are P_N^365 = 365!/(365-N)! permutations for N people to have different birthdays. There are 365^N total birthday assignments for the N people. Therefore the answer is: 1 - P_N^365/365^N",1 - P_N^365/365^N,,,probability
+Straight Shooter,"If we define a straight to be 5 cards with consecutive rank, not all sharing the same suit, what is the probability of being dealt a straight in a 5-card poker hand from a standard deck of cards?","Before I begin, here's some basic terminology and card basics:
+
+Rank: the 'number' of a card (Ace, 3, 7, King, etc)
+Suit: the 'sign' of a card (club, diamond, heart, spade)
+Standard Deck: there are 13 ranks (Ace, 2, 3, 4 ... 10, Jack, Queen, King), and 4 suits for each rank (given above), giving us a total of 13 * 4 = 52 cards per standard deck
+
+The most approach to solving this problem, in my opinion, is by beginning with the counting approach to probability. More specifically, the P(A) = valid/total, where the numerator denotes the number of valid ways event A can occur, and total denotes the total number of possible outcomes.
+
+The denominator is simply the total number of poker hands, of the number of ways you can be dealt 5 cards from 52. Namely, it's equal to (52 choose 5).
+
+The numerator, however, is a little more challenging, and asks us to count the number of valid ways for a straight to occur.
+
+Let's start this calculation by suit. Given that we have cards A, 2, 3, 4, 5, what are the total number of valid suit arrangements?
+
+Well, for each of the 5 ranks, we have 4 suits. This gives us 4^5 total arrangements of suits. However, we must remember that a condition of a straight is that all 5 cards cannot share the same suit. This means we must subtract 4^5 by 4, for the 4 invalid ways. The 4 possible invalid suit arrangements are if all card Ace through 5 have suit clubs, or suit diamonds, or suit hearts, or suit spades. We subtract this from 4^5 to get our final expression, 4^5 - 4, for the number of valid suit arrangements, given a correct rank arrangement.
+
+Now, we need to calculate the total number of valid rank arrangements. We can do this with basic enumeration (counting). First, we have Ace, 2, 3, 4, 5. Then, 2, 3, 4, 5, 6. After, 3, 4, 5, 6, 7. So on and so forth until our last enumeration, 10, Jack, Queen, King, Ace (note that ace can serve as low or high card). This gives us 10 total enumerations of rank.
+
+Combining the number of rank enumerations, and the number of valid suit arrangements per rank enumeration, we get 10(4^5 - 4).
+
+Divide this by our denominator, and we get our final solution: 10(4^5 - 4)/(52 choose 5)",10(4^5 - 4)/(52 choose 5),,,probability
+Samuel Flips,"Samuel flips a fair coin until he lands a tails. By playing this game, Samuel receives min(64, 2^n) dollars, when n is the number of times he flipped the coin. What is Samuel's expected payoff?","Based on the problem description, we know that the expected payoff that Samuel will receive is dependent upon the number of times he flips a coin before observing a tails. Since he will receive min(64, 2^n) dollars, we know that Samuel will receive $64 as long as he flips the coin 6 or more times. Anything less than 6 flips, would result in a payoff less than $64.
+
+With this observation, we split our expected payoff calculation by considering:
+
+1. The payoff if Samuel flips the coin 6 or fewer times along with the probability of this event.
+2. The payoff if Samuel flips the coin 7 or more times along with the probability of this event.
+
+E[P] = P(≤ 6 flips) × Payoff(≤ 6 flips) + P(≥ 7 flips) × Payoff(≥ 7 flips)
+
+The payoff from flipping the coin 6 or fewer times can be calculated as:
+
+∑ᵢ₌₁⁶ P(First tails observed on ith flip) × Payoff on ith flip
+= ∑ᵢ₌₁⁶ 1/2ⁱ × 2ⁱ = 1/2 × 2 + 1/4 × 4 + ... + 1/6 × 6 = 6 × 1 = 6
+
+Now we can calculate the the payoff from flipping the coin 7 or more times as:
+
+∑ᵢ₌₇∞ P(First tails observed on ith flip) × Payoff on ith flip
+= ∑ᵢ₌₇∞ 1/2ⁱ × 64 = 1/2⁷ × 2⁶ + 1/2⁸ × 2⁶ + ... + 1/2∞ × 2⁶
+= 1/2 + 1/4 + ... + 1/∞ = 1
+
+Putting these two pieces together, we get that the expected payoff from playing this game is 6 + 1 = 7 dollars.",7,,,probability
+Inconsistent bakers,"A donut shop has 25 different bakers, each of whom bake donuts. Each baker's output is independent from the others. It so happens that the standard deviation in donut output for each baker is 10. What is the standard deviation in the average number of donuts made by a baker?","If the standard deviation of a baker's output is 10, the variance is σ²_bakery = 10² = 100
+
+Since the total output of the bakery is the sum of independent random variables, the variance in the total number of donuts made is the sum of the variances:
+
+σ²_bakery = 25 · 100 = 2500
+
+We are interested in the average, which is can be notes as total output over number of bakers. Scaling a number by n scales variance by n², therefore scaling total output by 1/25 to find average means that the variance of the average number of donuts baked will be scaled by 1/625.
+
+σ²_μ = 2500/625 = 4 → σ_μ = 2
+
+(Note that this process is the same as dividing σ by √n where n is population size)",2,,,probability
+Expected Value of Highest Die,You roll two dice and select the one with the highest roll. What is the expected value of the die you selected?,"Let's take a look at the probabilities of different maxes.
+
+For your maximum value to be 1, both of your rolls must have been 1. There is 1 way to do this out of the 36 total outcomes. P(max = 1) = 1/36
+
+For your max to be 2, we can only roll 1's and 2's. This gives us 2 options for each roll totalling to 4. However, we must subtract the case where the highest roll is 1, leaving us with 3 ways for our max to be 2.
+P(max = 2) = (4-1)/36 = 3/36
+
+We can use a similar process to calculate P(max = 3) = (9-3-1)/36 = 5/36
+
+You can continue using this process to calculate P(max = n) or notice the pattern forming:
+P(max = n) = P(max = (n-1)) + 2/36
+
+P(max = 4) = 7/36
+
+P(max = 5) = 9/36
+
+P(max = 6) = 11/36
+
+E(max) = ∑ P(max = n) · n = 1/36 · 1 + 3/36 · 2 + 5/36 · 3 + 7/36 · 4 + 9/36 · 5 + 11/36 · 6
+
+E(max) = 161/36",161/36,,,probability
+Four of a Kind,What is the probability of drawing 4 of a kind from a standard 5-card hand?,"This problem reduces to the number of ways to get a 4 of a kind in a poker hand. When approaching counting problems of such a nature (number of poker hands, number of outfits etc.), I find it's best to generalize. In this case, whether the 4 of a kind is an Ace, a 2, or a King, the type of hand is unaffected. And the fifth and final card can be any of the remaining 48 cards. We can generalize a valid hand as such: {A A A A B}, where A represents one rank, and B represents a different rank of any suit. There are 13 valid ways to choose A, because there are 13 possible ranks in a standard deck of cards. Once we've chosen all 4 cards of rank A, there are 48 remaining cards, and any of them can serve as a valid B. As a result, the number of ways to get a four-of-a-kind hand is 13 * 48 = 624.
+
+To prove the above counting method is valid, here's an alternative implementation. Another possible arrangement is {A B B B B}, where we first select our single, and then choose the quad. There are 52 ways to first choose our single: it can be any card in the deck. Then, however, when choosing the quad, it can be any rank except rank A. This is because there are only 3 cards of rank A left, making it impossible to form a quad. That leaves us with 12 possible ranks for B. Multiplying across gives us the the number of ways count a valid four-of-a-kind hand: 52 * 12 = 624.
+
+As you can see, the number of ways to count valid hands is equivalent regardless of which rank we assign to be the quad or the single. This problem is not yet complete though because we are asked to compute the probability of drawing such a hand. Thus, we must divide the number of valid four-of-a-kinds by the number of possible poker hands. The number of valid poker hands is given by the number of ways to choose 5 cards from 52, namely (52 choose 5) or 2598960. Thus:
+
+P(4 of a kind) = 624/2598960 = 0.024%",624/2598960,,,probability
+Ascending Dice Rolls,You throw three fair dice consecutively. What is the probability that you obtain three numbers in strictly increasing order?,"To solve this problem, we can use conditional probability. Recall that P(A ∩ B) = P(A) × P(B | A). Let us define the following events:
+
+A - the event that we roll three different numbers
+B - the event that we roll 3 strictly increasing numbers
+
+Our goal is to find:
+
+P(Three unique numbers rolled in strictly increasing order) = P(A ∩ B)
+
+P(A ∩ B) = P(A) × P(B | A)
+
+The first term is simply 6/6 × 5/6 × 4/6 from drawing without replacement. The second term is 1/3! = 1/6, since there is only one way of permuting three distinct numbers to be strictly increasing. Therefore our answer is 6/6 × 5/6 × 4/6 × 1/6 = 5/54",5/54,,,probability
+Median Probability,"Given three random variables independently and identically distributed from a uniform distribution of 0 to 4, what is the probability that the median of them is greater than 3?","We can start by identifying how the median of the three variables could be greater than 3. There are two possible ways:
+
+1. Event A: All three variables have a value greater than 3.
+2. Event B: Two variables are greater than 3 and one is smaller than 3.
+
+With those two events defined, our goal is to now find:
+
+P(Median > 3) = P(A) + P(B)
+
+In order for the variable to have a value greater than 3 the value must fall between 3 and 4, which has a probability of 1/4 for a uniform distribution.
+
+P(A) = (1/4) * (1/4) * (1/4) = 1/64
+
+For a uniform distribution, the probability that a variable is less than 3, is simply one minus the probability that it is greater than 3. Given this can occur three times we multiply by 3.
+
+P(B) = 3 * ((3/4) * (1/4) * (1/4)) = 9/64
+
+Putting the two together we get:
+
+P(Median > 3) = P(A) + P(B) = 1/64 + 9/64 = 5/32",5/32,,,probability
+Perfect Samples,"Assume that you are taking samples of size s from a population. For each sample, let p represent the probability that every point in that sample is an inlier and let e represent the proportion of points in the sample that are outliers. Derive an equation in terms of s, p and e, to calculate the number of samples (N) needed in order to be 99% confident that there it at least one sample drawn that contains no outliers","The problem states that the proportion of points in a sample that are outliers is e, and therefore the proportion of points in the sample that are not outliers can be represented as 1 - e.
+
+Since we want to be 99% confident that we get at least one sample that is completely void of outliers, we want to make the P(Every Sample Contains Outlier) ≤ 0.01
+
+P(Sample Contains 0 Outliers) = (1 - e)^s
+
+P(Sample Contains at Least 1 Outlier) = (1 - (1 - e)^s)
+
+P(All Samples Contain at Least 1 Outlier) = (1 - (1 - e)^s)^N
+
+P(All Samples Contain at Least 1 Outlier) ≤ (1 - p)
+
+(1 - (1 - e)^s)^N ≤ (1 - p)
+
+Finally, we've arrived at an equation that restricts the probability that all the samples contain an outlier to less than 1%. Finally, we can solve for N to find the number of samples we would need:
+
+(1 - (1 - e)^s)^N ≤ (1 - p)
+
+N > log(1 - p)/log(1 - (1 - e^s))
+
+N > log(1 - 0.99)/log(1 - (1 - e^s))",log(1 - 0.99)/log(1 - (1 - e^s)),,,probability
+Find the Money Box,"There are five boxes: one with $150, the rest are empty. At any time, you may pay X dollars to open one of the boxes and keep the contents. Assuming you continue paying until you find the box with the money, what is the value X (in dollars) that makes the game fair?","Since there is no way to know in advance which box contains the $150, each box is equally likely to contain the money. The probability of finding the money in each box is 1/5.
+
+The expected number of boxes opened before finding the $150 can be calculated using the concept of expectation for discrete random variables.
+
+• The probability of finding the money in the first box is 1/5, and in this case, only 1 box is opened.
+• The probability of finding the money in the second box is 1/5, and in this case, 2 boxes are opened.
+• The probability of finding the money in the third box is 1/5, and 3 boxes are opened, and so on.
+
+The expected number of boxes opened, E[boxes], is the weighted sum of these possibilities
+
+E[boxes] = (1 × 1/5) + (2 × 1/5) + (3 × 1/5) + (4 × 1/5) + (5 × 1/5)
+
+This simplifies to:
+
+E[boxes] = (1 + 2 + 3 + 4 + 5)/5 = 15/5 = 3
+
+Thus, on average, 3 boxes will be opened before finding the one with $150.
+
+For the game to be fair, the expected cost should equal the expected reward. The reward for this game is $150, so the fair game condition is:
+
+Total expected cost = Expected reward
+3X = 150
+X = 50",$50 or 50 dollars,,,probability
+Subtree Removal,"You are given a rooted tree. On each step, you randomly choose a node and remove the subtree rooted by that node, and the node itself, until all subtrees have been removed and only the root remains. Find the expected number of steps in this process.","Every node in the tree has an equal probability of being selected. If a node is to be removed, we know that either the node itself, or one of the node's ancestors must have been chosen.
+
+The number of ancestors of a node i is Depth[i]
+
+P(i is removed) = Depth[i] / Size of Tree
+P(i is chosen) = 1 / Size of Tree
+P(i is removed | i is chosen) = 1
+
+We can use Bayes theorem to solve this problem where: P(A|B) = P(B|A)*P(A)/P(B) and therefore
+P(i is chosen | i is removed) = 1/Depth[i]
+
+We now use Linearity of Expectation to find the expected number of subtree removals. Define indicator variable X_i = 1 if i node was chosen.
+
+X = X₁ + X₂...X_n
+E[X] = ∑ᵢ₌₁ⁿ E[X_i]
+E[X] = ∑ 1 * P(X_i was chosen |i was removed)
+E[X] = ∑ᵢ₌₁ⁿ 1/Depth[i]",∑ᵢ₌₁ⁿ 1/Depth[i],,,probability
+Semi-Working Gum Machine,"You and two other friends get gum from a semi-functioning gum machine. This machine will pop out a stick of gum with a length from the interval [0,3] independently and uniformly. Of the 3 sticks, you will receive the shortest one. What is the probability the length of your gum stick is between 1 and 2?","If the minimum length is between 1 and 2, all sticks must be at least 1 long. This occurs with probability (2/3)³. However, this includes the instance where all sticks of gum are longer than 2. Subtracting this case we get our probability to be:
+
+(2/3)³ - (1/3)³ = 7/27",7/27,,,probability
+The Dealer's Deck,"You walk into a casino and play a game with the dealer. You and the dealer are each dealt a card from a fair, shuffled deck of 52 cards. If you have a strictly larger number than the dealer you will win, otherwise you will lose. What is the probability that you win?","We can solve this question using symmetry. There are three distinct outcomes that define the sample space. Let E₁ be the event that your number is larger than the dealer's; E₂ be the event that your number is equal to the dealer's; E₃ be the event that your number is smaller than the dealer's. By symmetry, P(E₁) = P(E₃), so we only need to find P(E₂). We know that when we are dealt a card, there are 51 cards that the dealer could have, of which only 3 could be of the same number, so P(E₂) = 3/51.
+
+Since ∑ω∈Ω P(ω) = 1, we can solve for P(E₁)
+
+∑ω∈Ω P(ω) = P(E₁) + P(E₂) + P(E₃) = 1
+
+2P(E₁) + P(E₂) = 1
+
+2P(E₁) + 3/51 = 1
+
+P(E₁) = 8/17",8/17,,,probability
+Even Prime Sum,"Two distinct prime integers between 1 and 20, inclusive, are selected uniformly at random. Find the probability their sum is even.","Let's first enumerate all the prime numbers between 1 and 20, inclusive. We have 2, 3, 5, 7, 11, 13, 17, and 19.
+
+The main observation to make to solve this problem is that the sum of any two primes, not including 2, is going to be even. This is because each prime, besides 2, is an odd number. And the sum of any two odd numbers is going to be even.
+
+Let's now solve for P(even). This is equivalent to 1 - P(odd) since the outcomes sum being even or odd make up the entire outcome space (the sum can only be even or odd). P(odd) is equal to the number of ways to get an odd sum, divided by the total number of possible sums.
+
+We can count the number of ways to get an odd sum by noting that this particular sum must contain 2. Therefore, we can enumerate: (2, 3), (2, 5), (2, 7) ... (2, 19). There are 7 total ways to get an odd sum. Divide this by the total number of possible sums, or combinations of 2 elements, or ways to choose 2 of the 8 elements, (8 choose 2) = 28. Therefore, we get P(odd) = 7/28 = 1/4. Subtract this from the expression above to get P(even) = 1 - P(odd) = 1 - 1/4 = 3/4.",3/4,,,probability
+Society of Women,"You are off venturing in a rainforest where you suddenly come into contact with an isolated civilization. In this civilization, girls are preferred and couples do not stop having children until they have had a girl. Assuming there is equal likelihood of a couple having a boy and a girl, what will the proportion of women in this society be after many years?","Let's assume there are n couples in this civilization. Each couple will stop having children once they have had a girl. This means there in the next generation there will exist exactly n girls.
+
+If the distribution of girls is geometric with p = 1/2, each couple will on average have 2 children, amounting to a total of 2n children. The proportion of girls in this society is:
+
+n/2n = 1/2",1/2,,,probability
+Power of a Test,"A medical research lab has concocted a new drug that they claim will cure 80% of people suffering from a novel disease. After examining the drug, the FDA believes that their claims regarding the efficacy of the drug are inflated. To validate their hypothesis, the FDA administers the drug to 20 people with the novel disease and observes, X, the number of individuals cured by the drug. More formally, the FDA is conducting the following test: H0: p=0.8 and Ha: p<0.8
+Assuming a rejection region of x<=12, what is the power of the test when p=0.6?","Power is 1 - β, where β is the probability that the test statistic is not in the rejection region when H_a is true. In order to calculate power, we must solve for β.
+
+β = P(We fail to reject H₀ | H_a is true) = P(x > 12 | p = 0.6)
+
+= ∑ᵢ₌₁₃²⁰ (20 choose i) × 0.6ⁱ × 0.4²⁰⁻ⁱ ≈ 0.416.
+
+Thus, the power of this test is: 1 - β ≈ 0.584",0.584,,,probability
+Significance Level Calculation,"A medical research lab has concocted a new drug that they claim will cure 80% of people suffering from a novel disease. After examining the drug, the FDA believes that their claims regarding the efficacy of the drug are inflated. To validate their hypothesis, the FDA administers the drug to 20 people with the novel disease and observes, X, the number of individuals cured by the drug. More formally, the FDA is conducting the following test: H0: p=0.8 and Ha: p<0.8
+Assuming a rejection region of x<=12 is used, what is the significance level, α, for this study?","Recall, that the significance level refers to the probability that we reject the null hypothesis when it is in fact true. Therefore, we can solve for α as:
+
+α = P(X ≤ 12 | p = 0.8)
+
+Let's first consider the probability that there is an 80% cure rate and exactly X = 12 people were cured. This can be formulated as:
+
+P(X = 12 | p = 0.8) = (20 choose 12) 0.8^12 × 0.2^8
+
+Now we can generalize this previous finding for X ≤ 12:
+
+α = P(X ≤ 12 | p = 0.8) = ∑(i=0 to 12) (20 choose i) 0.8^i * 0.2^(20-i)
+
+This is the cumulative distribution function of a binomial random variable with n=20 and p=0.8, evaluated at x=12. Computing this sum gives us α = 0.0321",0.0321,,,probability
+Disease Incidence,"A certain disease has an incidence rate of 2%. If the false negative rate is 10% and the false positive rate is 1%, what is the probability that a person who tests positive actually has the disease?","To solve this question, let's first understand what we are looking to find and what information we are already given.
+
+We'll define A to be the event that a person has the disease and we'll define B to be the event that the person tests positive for the disease. Our goal is to find:
+
+P(Person has the disease | Person tests positive) = P(A | B)
+
+We already know the following:
+
+Based on the incidence rate:
+• P(Having the disease) = P(A) = 0.02
+• P(Not having the disease) = ¬P(A) = 1 - 0.02 = 0.98
+
+Based on the false negative rate:
+• P(Testing negative | Have the disease) = P(¬B | A) = 0.1
+
+Based on the false positive rate:
+• P(Testing positive | Not having the disease) = P(B | ¬A) = 0.01
+
+Given that we already have this prior knowledge, we can apply Bayes rule to find the solution to this problem. Bayes rule is defined as:
+
+P(A|B) = P(B|A)P(A)/P(B)
+
+We need to find P(B|A), which is the probability of testing positive given that you have the disease. Since the false negative rate is 0.1, the true positive rate must be:
+P(B|A) = 1 - P(¬B|A) = 1 - 0.1 = 0.9
+
+We also need to find P(B), which is the total probability of testing positive:
+P(B) = P(B|A)P(A) + P(B|¬A)P(¬A) = 0.9 × 0.02 + 0.01 × 0.98 = 0.018 + 0.0098 = 0.0278
+
+Now we can apply Bayes rule:
+P(A|B) = P(B|A)P(A)/P(B) = 0.9 × 0.02/0.0278 = 0.018/0.0278 = 0.647...
+
+Therefore, the probability that a person who tests positive actually has the disease is approximately 0.65 or 65%.",0.65,,,probability
+Triple Coin,"You have 3 coins. One always comes up heads, one always comes up tails, and one is just a regular fair coin. If you pick one coin, flip it twice and get heads twice, what's the probability of flipping the same coin again and getting heads again?","Lets call H_i the result of having a heads on the i-th throw, and C the random variable corresponding to the choice of the coin, with three possible values: c₁ is the coin which always comes up heads, c₂ is the the coin which always comes up tails, and c₃ is the fair coin.
+
+= P(H₃|H₁H₂) = P(H₁H₂H₃|H₁H₂) = P(H₁H₂H₃)/P(H₁H₂) = ∑_C P(H₁H₂H₃, C)/∑_C P(H₁H₂, C)
+
+Lets compute the numerator:
+
+∑_C P(H₁H₂H₃, C) = P(H₁H₂H₃|c₁)P(c₁) + P(H₁H₂H₃|c₂)P(c₂) + P(H₁H₂H₃|c₃)P(c₃)
+                   = 1 × 1/3 + 0 × 1/3 + 1/8 × 1/3 = 9/24
+
+Lets compute the denominator:
+
+∑_C P(H₁H₂, C) = P(H₁H₂|c₁)P(c₁) + P(H₁H₂|c₂)P(c₂) + P(H₁H₂|c₃)P(c₃)
+                = 1 × 1/3 + 0 × 1/3 + 1/4 × 1/3 = 5/12
+
+Putting these two together we get:
+
+P(H₃|H₁H₂) = 9/24 ÷ 5/12 = 9/10",9/10,,,probability
+Orb Draws,"An urn containing 2 red and 1 blue orb is in front of you. At each step, you will take out an orb uniformly at random and replace it with a blue orb, regardless of the color selected. Find the expected amount of draws needed until the urn contains only blue orbs.","This question has three states which can only be reached successively. The first state is the starting state, or 2R1B (2 red, 1 blue). From here, if we draw a blue orb, we return to this state. If we draw a red orb, it gets replaced with a blue and we advance to the second state, 1R2B.
+
+This state exhibits similar behavior. If we draw a blue orb, we return to this state. However, if we draw the last red orb, we exit the game with state 0R3B.
+
+This problem reduces to the sum of the number of draws to advance from state 1 to state 2 (we'll call X), and the number of draws to advance from state 2 to exit (we'll call Y).
+
+We want to solve for the total number of draws to advance from state 1 to exit (we'll call Z). We know Z = X + Y. We're asked to solve for the E(Z), or the sum E(X) + E(Y). X and Y each follow the geometric distribution with different parameters. X ~ Geom(2/3) and Y ~ Geom(1/3). This conclusion was drawn from the fact that for each random variable X and Y, we are calculating the number of draws until we observe our first success (in this case, a success is marked by drawing a red marble).
+
+From here, we can calculate the expectation of each geometric random variable by taking the inverse of its parameter p, E[Geom(p)] = 1/p.
+
+E(Z) = E(X) + E(Y)
+E(Z) = E(Geom(2/3)) + E(Geom(1/3))
+E(Z) = 3/2 + 3
+E(Z) = 9/2",9/2,,,probability
+Lucky Bubble,"Steven received an array of size n filled with a random permutation of the numbers 1,2,3,...,n. He performs one pass of the bubble sort algorithm and the array becomes sorted. What is the probability of this happening?","In total there are n! possible permutations of n numbers and we want only the permutations that end up in a sorted array after a single pass of the bubble sort algorithm.
+
+A single pass runs n - 1 operations that could be encoded as a 0 (no swap) or 1 (swap), leaving a total of 2^(n-1) possible swap combinations for the last pass of the bubble sort algorithm.
+
+To get the probability, we divide this number by the total number of permutations:
+
+P(Sorted after one pass) = 2^(n-1)/n!",2^(n-1)/n!,,,probability
+Dice Game 3,"You are offered a game where you roll 2 fair 6-sided die and add the sum to your total earnings. You can roll as many times as you'd like however, in the case where both die land on the same face, the games stops and you lose everything you gained until that point.
+
+For what values should you re-roll?","Our decision comes down to is it worth re-rolling? Intuitively, the greater our current sum, the less we should want to re-roll based on the risk of losing a lot. We should only re-roll when the value of re-rolling is greater than cashing out our current earnings risk free.
+
+Let's call our current earnings x. Our expected value on a re-roll given that we have already accumulated x is 1/6(0) + 5/6(x + 7). This is because we will roll identical faces with probability 1/6 and add to our sum with probability 5/6. In the case we add to our sum, we are expecting a sum of 7 as we expect a value of 3.5 from each die.
+
+The marginal value re-rolling should be greater than taking our earnings risk free so using this we can form our inequality:
+
+1/6(0) + 5/6(x + 7) > x
+
+Simplifying:
+5/6(x + 7) > x
+5x/6 + 35/6 > x
+5x/6 - x > -35/6
+-x/6 > -35/6
+x < 35
+
+35 is the indifference point, thus we should roll for every value before it and keep all values above it.",x < 35,,,probability
+Repeated Rolling,"Suppose a game has you roll a fair six-sided die repeatedly, until you first encounter a number which has previously appeared. Let r denote number of times the die was rolled, and p_r the probability of rolling r times. Calculate p_3.","In order for r to equal 1, the first roll would have to be a value that had already been rolled. Since this cannot occur, p₁ = 0
+
+For r to equal 2, the game must terminate on the second roll, meaning the second roll would have to equal the value of the first roll. For a given value x of the first roll, the probability that the second roll also shows x, is 1/6, seeing as how we're rolling a fair die.
+
+For r to equal 3, two conditions must be met. The first and second roll must differ, and the third roll must equal either the value of the first or second roll. Each of these events must happen exactly as described in order for r to equal 3. Since these events occur in succession and the outcome of each roll is an independent event, we can multiply the probability of each:
+
+P(first roll = x) * P(second roll = y ≠ x) * P(third roll either x or y) = 6/6 * 5/6 * 2/6 = 10/36
+
+Therefore, p₃ = 10/36 = 5/18.",5/18,,,probability
+Normal Distributions,Consider that X and Y are independent standard normal random variables. What is the P(Y>4X)?,"Since X and Y are both mean 0 normal random variables, Y - 4X is also a mean 0 normal random variable. Therefore, P[Y > 4X] = P[Y - 4X > 0] is asking about the probability that a normal random variable is greater than its mean. This is 0.5 by the symmetry of the normal distribution about its mean.",0.5,,,probability
+Deconstructed Rubik's Cube,You have a standard Rubik's Cube and you break it apart into 27 cubes. You put those 27 cubes into a bag and you randomly pull one out and toss it in the air. The cube lands such that you can only see 5 non-painted sides. What is the probability that you pulled a cube with one colored side?,"This is a conditional probability problem where the condition is the landed cube shows 5 non-colored sides. There are only two types of cubes that can satisfy this condition, the center cube with no colored sides and the six non-edge cubes on the center of each face with just 1 colored side. The cubes with 1 colored side must land face down to show 5 non-colored sides, thus the probability of the condition is:
+
+1/27 + 6/27 · 1/6
+
+We are looking for the probability the cube that landed is one with 1 colored side given the condition so the probability of this occurring is:
+
+(6/27 · 1/6)/(1/27 + 6/27 · 1/6) = 1/2",1/2,,,probability
+Grand Slam Tournament,"In Wimbledon, 128 players with distinct rankings compete to win a Grand Slam tennis title. Assume that the player with the higher ranking always defeats the player with the lower ranking and the winner proceeds to the next round. What is the probability that the highest ranked player plays the second highest ranked player in the final round?","To solve this question try visualizing the tournament bracket. In the first round, 128 players will compete of which 64 will advance to the next round. Each round the number of players halves until we reach the final round.
+
+We know that the highest-ranked player P₁ will always win the tournament. Therefore the second-highest player's, P₂, chance of making it to the finals is dependent upon not playing P₁ in any of the earlier rounds.
+
+We noted above that in the first round 128 players will compete. These 128 players will be divided into two subgroups of 64 players each. The only way that P₂ doesn't play P₁ before the finals is if they are in different subgroups. Therefore the answer to this question is to find the P(P₁ and P₂ are in different subgroups).
+
+There are 127 possible players that P₂ can play in the first round,
+64 of which are not in the same subgroup as P₁. Therefore the probability that P₁ and P₂ play in the finals is 64/127",64/127,,,probability
+Expected Couples,Eight people from four married couples are randomly assigned to seats around a round table. What is the expected number of couples that are seated next to each other?,"Let's take a look at a given woman. There are 2 seats adjacent to this woman and her husband is randomly seated in one of the 7 remaining seats. Thus the probability the woman sits next to her husband is 2/7. Since seating is assigned at random, no woman has a different likelihood to be seated next to her husband and so the expected number of woman that sit next to their husband (or total couples is): 4 · 2/7 = 8/7",8/7,,,probability
+Gone Fishing,"A bear wants to catch 3 fish from a river. Upon catching 3 fish the bear leaves. When a fish comes, there is a 1/2 chance he'll catch it. What is the probability that the fifth fish will not be caught?","The bear will only be fishing for the fifth fish when it has caught 0,1, or 2 fish out of the first 4. This is binomial with p = 1/2:
+
+P(F) = ((4 choose 0)(1/2)^4 + (4 choose 1)(1/2)^4 + (4 choose 2)(1/2)^4) = 11/16
+
+We know the bear will catch the fifth fish half the time when it is fishing for it. This corresponds to the probability 11/16 * 1/2. However, we are looking to compute the probability that the fifth fish is not caught. The probability the fifth fish is not caught is simply the complement of this event and so we get: 1 - (11/16 · 1/2) = 1 - 11/32 = 21/32",21/32,,,probability
+The Lucky Door,"You're on a gameshow and are tasked to choose the lucky door. Behind 1 door is $10,000. The remaining four have nothing. How much are you expected to win?","The probability you select the correct door is 1/5. Your prize when you select the door is $10,000. Thus your expected earnings of this game is 1/5 · 10,000 = $2,000","$2,000 or 2000 dollars",,,probability
+Odd Flips,"Suppose you flip a fair coin 1,
+000 times. What is the probability you observe an odd number of heads?","The simplest way to think of this problem is to realize everything is contingent on the final flip. If you have an odd number of heads after 999 flips, you will need a tails on the last flip to maintain an odd count. If you have an even number of heads after 999 flips, you will need a heads on the last flip to create an odd count. Regardless of what you have, the desired side will occur with p = 1/2.
+
+Therefore, the probability of getting an odd number of heads in 1,
+000 flips is 1/2.",1/2,,,probability
+Royal Card Game,"I give you a shuffled deck of 14 cards which contain exactly one card from each rank and a Joker. You win $100 if you flip over the King, Queen, & Jack but if at any point you have flipped over the Joker, the game ends and you win nothing.
+
+How much would you be willing to play this game?","The only cards that have an effect on the outcome of the game are the King, Queen, Jack, & Joker so only these 4 cards need to be considered.
+
+You lose the game if the Joker comes before any one of these three royal cards, so the probability of you winning is the same as the probability the Joker is selected last among these cards. The probability any 1 of the 4 cards is last is 1/4.
+
+Your expected earnings from playing this game is 1/4 · 100 = $25, so you should be willing to pay up to $25 dollars for this game.",$25 or 25 dollars,,,probability
+Exactly 6,"If I roll a dice 36 times, what is the probability that each number appears exactly 6 times?","To solve this question, we can leverage the multinomial theorem. This theorem states that for an experiment with n trials, with k possible results and x₁, ..., xₖ desired outcomes corresponding to each of the possible results, the number of possible experimental outcomes is given by the following formula: (n choose x₁,...,xₖ) = n!/(x₁!...xₖ!)
+
+We know that the probability of any face from the dice showing up is 1/6 and that we are rolling the dice 36 times. Therefore, we have the solution given below:
+
+(36 choose 6,
+6,
+6,
+6,
+6,
+6) × (1/6)^36 = 36!/(6!^6) × (1/6)^36 ≈ 0.00025
+
+This calculation represents:
+- The number of ways to arrange 36 rolls such that each face appears exactly 6 times
+- Multiplied by the probability of any specific sequence occurring
+
+The result is approximately 0.00025, or about 1 in 4,
+000.",0.00025,,,probability
+Multiple of Six,You roll a fair six-sided and sum the outcomes until you reach a multiple of 6. What is the expected number of times you expect to roll the die.,"Suppose s is the sum of our die after n rolls. There are 6 possible values for what s mod 6 can be. At first glance, that might suggest there are 6 possible cases for s after n rolls, but notice that regardless of what s is, there exists exactly 1 roll that brings the sum to a multiple of 6. (ie. If 2 = s mod 6 you must roll a 4 to reach a multiple of 6)
+
+This means the probability of reaching a multiple of 6 on your next roll will always be 1/6, resulting in a geometric distribution with p = 1/6. The expectation of such a random variable is given by μ = 1/p = 6.
+
+We can also get 6 without knowing the behavior of a geometric distribution. Suppose our number of expected rolls is x. We can say x = 1/6(1) + 5/6(x + 1)
+(there is a 1/6 chance we get a multiple of 6 and a 5/6 chance we go back to square one after an additional roll). Solving this system we also get x = 6.",6,,,probability
+Dice Game 1,"Two players take turns rolling two six-sided dice. Player A goes first, followed by player B. If player A rolls a sum of 6, they win. If player B rolls a sum of 7, they win. If neither rolls their desired value, the game continues until someone wins. What is the probability that player A wins?","To begin, let's start by considering the probability of rolling a sum of 6 with two dice and the probability of rolling a sum of 7 with two dice.
+
+We can roll a six in the following ways: 1&5,
+5&1,
+2&4,
+4&2,
+3&3. Since there are 36 total ways to roll two dice, the probability of rolling a sum of 6 is 5/36. We can do the same for rolling a sum of 7. A seven can be rolled in the following ways: 1&6,
+6&1,
+2&5,
+5&2,
+3&4,
+4&3. This gives us the probability of rolling a sum of 7 as 6/36 = 1/6.
+
+Based on this information, you may be inclined to believe that player B will win the game because the probability of rolling a 7 is larger than the probability of rolling a 6. However, there's one important part of this problem that you must remember - player A goes first. Therefore, we want to investigate whether the advantage of going first offsets the lower probability associated with rolling a sum of 6.
+
+Player A can win the game in the following ways:
+
+1. Player A rolls a sum of 6 on their first roll.
+2. Player A fails to roll a sum of 6 on their first roll, then player B fails to roll a sum of 7, and then player A rolls a sum of 6.
+
+Note that pattern #2 can continue indefinitely as long as player A eventually rolls a sum of 6 before player B rolls a sum of 7. In essence, there is a sequence of events that take place with some k number of failures until we encounter the first success of player A rolling a 6. The process we just described can be modeled by the geometric distribution.
+
+Let p_A = 5/36 be the probability that player A rolls a 6, and p_B = 6/36 = 1/6 be the probability that player B rolls a 7.
+
+The probability that player A wins on their first roll is p_A = 5/36.
+
+The probability that player A wins on their second turn (after both players fail on their first turns) is (1-p_A)(1-p_B)(p_A) = (31/36)(5/6)(5/36).
+
+The probability that player A wins on their third turn is (1-p_A)(1-p_B)(1-p_A)(1-p_B)(p_A) = (31/36)(5/6)(31/36)(5/6)(5/36).
+
+This pattern continues, forming a geometric series. The sum of this infinite series gives us the total probability that player A wins:
+
+P(A wins) = p_A + (1-p_A)(1-p_B)p_A + (1-p_A)(1-p_B)(1-p_A)(1-p_B)p_A + ...
+
+This can be simplified to:
+P(A wins) = p_A / [
+    1 - (1-p_A)(1-p_B)
+]
+Therefore, the probability that player A wins is 30/61.",30/61,,,probability
+Number of Turns,"Suppose you have a deck of 20 cards with values ranging from 1 - 10. Each card appears in the deck exactly twice. You draw 2 cards at a time uniformly at random from the 20 cards. If they match in value, you remove them from the deck. Otherwise, they are put back into the deck. The game finishes once there are no more cards to draw. Each drawing of two cards is a turn. Find the expected number of turns needed to finish the game.","Let T be the total duration of the game. We are going to generalize this to n pairs of cards. Then:
+T = T₁ + T₂ + ... + Tₙ where Tᵢ is the amount of draws needed to go from i - 1 pairs drawn to i pairs drawn. By linearity of expectation:
+
+E[T] = ∑ᵢ₌₁ⁿ E[Tᵢ]
+
+Next we need to find E[Tᵢ
+]. If i - 1 pairs are already drawn, then there are 2n - 2(i - 1) = 2(n - i + 1) cards left in the deck. For each drawing, fix the first card.
+
+P(second matches first) = 1/(2(n - i + 1) - 1)
+
+as there are 2(n - i + 1) - 1 cards left after the first of the pair is drawn, and only 1 of the cards is the same value as the first card. Therefore, as this is independent between trials:
+
+Tᵢ ~ Geom(1/(2(n - i + 1) - 1))
+
+E[Tᵢ] = 2(n - i + 1) - 1
+
+E[T] = ∑ᵢ₌₁ⁿ (2(n - i + 1) - 1)
+
+E[T] = ∑ᵢ₌₁ⁿ (2i - 1)
+
+E[T] = n²
+
+Since n = 10 in our problem, the expected number of turns is 10².",100,,,probability
+Maximize the Product,Suppose you roll two fair 6-sided dice. What is the expected value of the product of the two dice?,"Let's denote the values of the two dice as D1 and D2. We need to find E[D1 · D2
+].
+
+Each die has an expected value of:
+
+E[D1] = E[D2] = (1 + 2 + 3 + 4 + 5 + 6)/6 = 3.5
+
+Since the two rolls are independent, the expected value of the product is the product of the expected values:
+
+E[D1 · D2] = E[D1] · E[D2] = 3.5 · 3.5 = 12.25",12.25,,,probability
+Red Rubik's Cube,"A standard white 3 x 3 x 3 rubik's cube is dipped into paint so that its entire external surface is colored red. Then, we explode the rubik's cube, sending all 27 unit cubes flying everywhere. We inspect one in particular, which is lying face down. No faces are red.
+
+What is the probability that this cube was the center one?","This question is more of a test of comprehension than a test of mathematical ability or maturity. It's key to realize that we are given a piece of information: that the cube in question has 5 visible white faces. The sixth face is lying face down, and as a result we cannot know whether it is white or red. This implies that the cube in question can either be the center cube, or it could be one of the six cubes which have exactly one red face and that red face happens to be lying face down, leaving 5 visible white faces.
+
+Comprehending the implication of the given information is essential to solving the problem. Given this piece of information, we are asked to compute the probability that the cube in question is the one from the center ie. the one with 6 white faces. Since we are asked to compute the probability of an event given some information, we can use Bayes' Rule:
+
+A := cube we see is center cube
+
+B := cube in question has 5 visible white faces
+
+P(A|B) = P(A ∩ B)/P(B) = P(A)/P(B)
+
+The second equality comes from the fact that if the cube in question is the center one, then it is guaranteed to have 5 visible white faces showing no matter its orientation on the ground. As a result, the probability reduces to P(A).
+
+The P(A) is equal to the probability that we see the center cube. Since there are 27 cubes, this probability is 1/27.
+
+The P(B) is the probability that the cube on the ground has 5 visible white faces. There are only 7 total cubes for which this is possible (the single center cube with 6 white faces, and the 6 cubes in the center of each face, with only 1 red face). P(B) is the collective sum of these two disjoint sets. There are 6 cubes with 1 red face, each occurring with probability 1/27, and each with probability 1/6 of being red face down, making them validly show 5 white faces. Multiplying through, we get: 6 * 1/27 * 1/6 = 1/27
+
+The probability of the center cube occurring and being in a valid orientation is simply 1/27 because it will properly show 5 white face in any of it's six orientations.
+
+Adding these two value together we get our P(B) = 1/27 + 1/27 = 2/27
+
+Plugging this back into our original equation, we get:
+
+P(A|B) = P(A)/P(B) = (1/27)/(2/27) = 1/2",1/2,,,probability
+Uniform Quotient,"If a and b are uniform in [
+    0,
+    1
+] what is the probability that a/b is in [
+    1,
+    3
+]?","If the quotient of a/b lies in [
+    1,
+    3
+], b is at least a/3 and at most a. Thus, we can re-write our probability to:
+
+P(a/3 < b < a)
+
+We can substitute any value of a into this to find the general conditional probability:
+
+P(a/3 < b < a|a) = a - a/3 = 2a/3
+
+Using the law of total probability, we can sum all of the conditional probabilities to find the general probability:
+
+P(a/3 < b < a) = ∫₀¹ P(a/3 < b < a|a)da = ∫₀¹ 2a/3 da = 1/3",1/3,,,probability
+Dice Games EV,You are playing a game where two players each throw two dice. If any one die matches the other you win a dollar. If there is no match you lose a dollar. Would you play this game?,"To determine whether we should play this game we can calculate the expected value of playing and determine whether that value is positive. The probability of getting 0 matches can be calculated as the number of ways we roll 4 unique numbers divided by all possible ways we can roll 4 dice. This would equate to:
+
+P(0 matches) = Number of ways to roll 4 unique dice / Total number of ways to roll 4 dice = (6 * 5 * 4 * 3) / 6^4 = 5/18
+
+To calculate the expected payoff we can compute:
+
+Expected Payoff = P(At least 1 match) * 1 - P(0 matches) * 1 = 13/18 - 5/18 = 8/18
+
+Since the expected payoff is positive, I would play this game.",Yes,,,probability
+Complete Sets,There are 5 distinct sets with 3 blocks each. Six blocks are removed at random. Compute the expected number of complete sets remaining.,"Let's take a look at if any given set remains intact. For a set to remain complete, only blocks of different sets can be removed. Thus the probability any given set remains intact is: 12/15 · 11/14 · 10/13 · 9/12 · 8/11 · 7/10 = 12/65
+
+Since blocks are removed at random, no set is more or less likely to remain complete. By linearity of expectation, the expected number of complete sets is: 5 · 12/65 = 12/13",12/13,,,probability
+Conditional Die Rolls,"Dan rolls a dice until he gets a 6. Given that he did not see a 5, what is the expected number of times Dan rolled his die?","If Dan did not see a 5, that means the condition is 6 came before 5. When rolling a fair dice, this will occur half the time, thus the probability of the condition is 1/2.
+
+The probability of rolling a 6 given the condition is 1/6 ÷ 1/2 = 1/3. Because rolls are independent of each other, this distribution is geometric with p = 1/3 resulting in:
+
+μ = 1/p = 3
+
+(Note if he does not see 5 the probability of rolling a 6 is not 1/5. That suggests Dan is equally likely to roll a 1,2,3,4, and 6 which can not be true since you know 6 comes before 5 which is not necessarily the case with the other numbers)",3,,,probability
+Ten Floor Building,"A building has 10 floors above the basement. If 12 people get into an elevator at the basement, and each chooses a floor at random to get out, independently of the others, at how many floors do you expect the elevator to make a stop to let out one or more of these 12 people?","We can solve this problem using indicator random variables. These variables help decompose a larger random variable into smaller, binary components.
+
+Let S be the random variable indicating the number of floors the elevator stopped at. We want to find E[S].
+
+We can break down S into the sum of 10 indicator random variables X₁, X₂, ..., X₁₀, where:
+- X_i = 1 if the elevator stops at floor i
+- X_i = 0 if the elevator doesn't stop at floor i
+
+By linearity of expectation:
+E[S] = E[X₁ + X₂ + ... + X₁₀] = E[X₁] + E[X₂] + ... + E[X₁₀]
+
+Due to symmetry (all floors are identical), we can compute E[X_i] for any i and multiply by 10.
+
+For any floor i:
+- Probability a specific person doesn't get off at floor i = 9/10
+- Probability none of the 12 people get off at floor i = (9/10)¹²
+- Probability at least one person gets off at floor i = 1 - (9/10)¹²
+
+Therefore:
+E[X_i] = 1 - (9/10)¹²
+E[S] = 10 × (1 - (9/10)¹²) ≈ 7.17",7.17,,,probability
+Even Before Odd,Suppose you roll a fair 6-sided die until you've seen all 6 faces. What is the probability you won't see an odd numbered face until you have seen all even numbered faces?,"It's important to realize that you should not focus on the number of rolls in this question, but rather the ways to order when a face has been seen. i.e) The sequence 2,5,3,1,4,6 represents your first unique sighting being a 2, second being a 5, third being 3, and so on. This would be an invalid sequence as we have seen an odd numbered face before seeing all the even numbered faces.
+
+There are 6! total orderings. We can use this as our denominator.
+
+There are 6! total orderings. We can use this as our denominator.
+
+For our numerator, we want to group only even numbers for the first 3 sightings, and the remaining odd numbers for the last 3.
+
+There are 3! ways to order the odd numbers as well as 3! ways to order the even numbers.
+
+3!3!/6! = 6 · 6/720 = 1/20",1/20,,,probability
+Number of Runs,"Imagine you are given a standard deck of 52 cards (half of the cards are red and the other half are black). A run is defined as a block of cards that are drawn consecutively and all have the same color. As an example, BBRRBBB has 3 runs.
+
+Find the expected number of runs in a shuffled deck of cards.","Imagine we have a sequence of cards X₁, X₂, ..., Xₙ. Each Xᵢ corresponds to either a black card or a red card.
+
+Now, let's imagine that we have another variable Y which checks whether Xᵢ and Xᵢ₋₁ are the same color card. Specifically, if Xᵢ ≠ Xᵢ₋₁ then Yᵢ = 1 otherwise Yᵢ = 0. We mark the case of Xᵢ ≠ Xᵢ₋₁ as 1 because it represents the end of a run and our goal is to find the expected number of runs.
+
+Next we want to find E[Y₁, ..., Yₙ
+] = E[Y₁
+] + E[Y₂
+] + ... + E[Yₙ
+]. Since E[Yᵢ
+] is 1 when Xᵢ ≠ Xᵢ₋₁ we can express E[Yᵢ
+] = P(Xᵢ ≠ Xᵢ₋₁)
+
+The expected number of runs is:
+
+E[N
+] = ∑P(Xᵢ ≠ Xᵢ₋₁) + 1
+
+The +1 in the equation above represents the first card that we draw. This card will always be counted as one run because there are no cards that were drawn before it.
+
+E[N
+] = ∑ Number of ways Xᵢ ≠ Xᵢ₋₁/Total number of combinations + 1 = 51(26/51) + 1 = 27",27,,,probability
+Dice Game 2,"We play a game with two tetrahedral dice, red and blue, each with faces labeled 1-4. In each turn, you simultaneously roll both dice.
+
+If the blue shows more than the red, you are paid the difference, otherwise paid nothing. If the blue and red show the same value, the game is immediately over, otherwise, you take another turn.
+
+What is the fair value of the game?","Let's use a stochastic approach to solve this problem. Let's call b the outcome of the blue die and r the outcome of the red die. First, let's find the P(b > r), P(b = r), and P(b < r) and their outcomes, as they each yield a different result.
+
+Total cases: 4 · 4 = 16
+
+Of these 16 cases, there are 4 ways to create an outcome such that b = r. Thus, P(b = r) = 4/16 = 1/4
+
+With the 12 remaining cases, half will result in b > r and the other half will be r < b. Both outcomes have a probability of 12/16 · 1/2 = 3/8 Thus, P(b > r) = P(b < r) = 3/8
+
+Now let's find our earings given each of these three scenarios. Let's call x our earnings.
+
+In the situation b = r, the game stops and we earn nothing so our conditional expectation is E[x|b = r] = 0
+
+In the situation b < r, we earn nothing but the game doesn't stop so x remains unchanged, therefore: E[x|b < r] = E[x]
+
+In the final situation where b > r, we are paid the difference and are able to continue playing. Of the six total cases where b > r, one will result in a difference of 3, two will result in a difference of 2, and three will result in a difference of 1. The average collected difference will be 1/6 · 3 + 2/6 · 2 + 3/6 · 1 = 5/3. This will be in addition to your earnings so E[x|b > r] = E[x] + 5/3
+Solving for E[x] we are left with: E[x]=2.5",2.5,,,probability
+Even Flips,Paul flips a fair coin until he obtains two consecutive heads or tails for the first time. Find the probability Paul flips the coin an even number of times.,"Let's call E the event Paul flips the coin an even number of times and F_n the outcome of the nth flip.
+
+P(E) = 1/2 P(E|F₁ = heads) + 1/2 P(E|F₁ = tails)
+
+By symmetry, P(E|F₁ = heads) = P(E|F₁ = tails), and since they are the same, they also equal P(E). It does not seem to matter what we get on the first flip. Let's examine F₂
+
+P(E) = 1/2 P(E|F₁ = F₂) + 1/2 P(E|F₁ ≠ F₂)
+
+In the case Paul's first and second flip match, he found consecutive flips with 2 flips so,
+
+P(E|F₁ = F₂) = 1
+
+In the case his first two flips don't match, he is at the same level of progress as F₁ but with an additional flip. Therefore,
+
+P(E|F₁ ≠ F₂) = 1 - P(E)
+
+We now have:
+
+P(E) = 1/2 + 1/2(1 - P(E)) ⟹ P(E) = 2/3",2/3,,,probability
+30-20 Game,"Two players, Philip and Brandon, have a 30-side and 20-side dice, respectively. Each player rolls their dice and the player with the highest role wins (Brandon also wins in the event of a tie). The loser of the game pays the winner an amount equivalent to the value of the winner's dice roll.
+
+What is the expected value for the payoff of Philip?","Philip will roll betweeen 1-20 with probability 2/3. In these instances, Philips expected earnings are negative when he ties and zero elsewhere (as the outcomes that Brandon beats Philip and Philip beats Brandon will average out to zero). Given the role is between 1-20, Phillip and Brandon will tie with probability 1/20. The average of the tie values is 10.5
+
+In the 1/3 cases where Philip rolls greater than 20, he will pocket that value every single time which is 25.5 on average. Therefore,
+
+E[P] = 2/3 · 1/20(-10.5) + 1/3(25.5) = 8.15",8.15,,,probability
+Biased Coin Sequence,"You are given a coin with probability 2/3 to land on heads and 1/3 to land on tails. If you flip this coin until you get a tails immediately followed by heads, how many times do you expect to flip the coin?","Let's call the number of flips needed to see a tails immediately followed heads TH. If our first flip is heads, one flip has been added but no progress has been made so we will now expect E[TH
+] + 1 total flips. If our first flip is tails, we finish on the next heads. The expected number of flips until heads is geometric with p = 2/3 so we expect an additonal 3/2 flips until we get the finishing heads. Given the probabilities these outcomes we can say:
+
+E(TH) = 2/3(E(TH) + 1) + 1/3(3/2 + 1)
+
+We can now solve for E(TH).
+
+E(TH) = 2/3 E(TH) + 9/6
+
+1/3 E(TH) = 9/6
+
+⇒ E(TH) = 9/2",9/2,,,probability
+Consecutive Heads,"You have a fair coin. Denote X_i as the number of flips required to see exactly i consecutive heads. Compute E(X₁), E(X₂), E(X₃).","Let's start by solving for E(X₁):
+
+E(X₁) is the expected number of flips until we see exactly 1 head. We can use the Law of Total Probability to split the calculation of expectation into a weighted average of two parts: one which corresponds to the number of flips if we first get a head, and the other the number of flips which correspond to a tail. This yields the following sum:
+
+E(X₁) = P(Tail) * [
+    1 + E(X₁)
+] + P(Head) * 1
+
+As you can see from the sum above, if we get a tails we essentially 'restart' and, we're left summing the single tails flip (1) and the expected number of flips to get 1 head, E(X₁). On the other hand, if we get a heads, we would simply return the value 1 because it took 1 flips for us to witness the head. This forms a kind of recursive relationship, we can substitute in the values for respective probabilities, and solving for E(X₁) we find it equals 2.
+
+Let's now solve for E(X₂): By the same logic as above, we can compute the expectation as a weighted average, yielding the following sum:","E(X₁) = 2, E(X₂) = 6, E(X₃) = 14",,,probability
+Three Sticks,Assume you are given a stick that is 1 meter in length. Randomly select 2 points on the stick and break it at these 2 points to get 3 pieces. What's the probability that the smallest piece is at most 0.2 meter?,"We can start by illustrating a diagram indicating where the stick is broken into 3 pieces. We denote the first point as x and the second as y. Then, the given length of the 3 pieces is x, y-x, and 1-y. We are looking to calculate the P(min(x, y-x,
+1-y) ≤ 0.2). This corresponds to the event that the length of the smallest of the 3 pieces, or min(x, y-x,
+1-y), is at most 0.2, or less than or equal to 0.2.
+
+The first key observation to solving this problem is to recognize that P(min(x, y-x,
+1-y) <= 0.2) is equal to 1 - P(x, y-x,
+1-y ≥ 0.2). This is by the complement rule. The complement to the event upper bounding the minimum, is the event that all are above the minimum. This makes logical sense: the 'opposite' of the minimum being less than 0.2 is for all to be above 0.2.
+
+We can now partition the above sample space visually as such. We start with a 1 x 1 grid, random variables x and y on their respective axes. We then partition this space in half along the line y=x, and restrict our outcome space to the upper half triangle of the square. This is because, by indicating that y is the second or maximum of the two points, we are restricting our outcome space to only points with y ≥ x.",0.51,,,probability
+How Many Heads,"There are three coins in a hat. One with probability 1/3 of getting heads, another with probability 2/3 of heads, and the last coin always landing on heads. I take one out and flip it twice landing on heads both times. If I flip the coin twelve more times, how many heads do you expect among these flips?","To find the expected number of heads in the next n flips, we need to have an idea of which coin has been selected. Using the condition that both flips were heads, we can compute the conditional probability of each coin. The probability of two heads is the union of the probabilities of getting two heads for each coin.
+
+P(2H) = 1/3(1/3)² + 1/3(2/3)² + 1/3(1)² = 14/27
+
+The probability the 1/3 coin was selected is: 1/3(1/3)²/(14/27) = 1/14
+
+Similarly the probability the 2/3 coin was picked is: 1/3(2/3)²/(14/27) = 4/14
+
+Leaving the probability the always heads coin is picked to be 9/14. Now that we know the probability of each coin being selected, we can find the expected number of heads in the next twelve flips. If we have a coin with probability p to land on heads, we can expect 12p heads. Thus the expected number of heads is: 1/14(12 · 1/3) + 4/14(12 · 2/3) + 9/14(12 · 1) = 72/7",72/7,,,probability
+Fruit Basket,"You have a basket with an assortment of fruits. Inside this basket, there are 10 apples,
+20 oranges, and 30 peaches. You take out fruits one by one and at random. What is the probability that there will be at least 1 orange and 1 peach in the basket after you've taken out all the apples?","Let's call a, o, and p the number of turns it takes you to finish taking that respective fruit out of the basket. If we finish picking apples before oranges and peaches, we know a < o and a < p. There exist two ways where we can satisfy this joint condition. Either a < o < p or a < p < o. Let's compute the probability of each.
+
+In the case where we finish picking apples before oranges and oranges before peaches, peaches are what would be finished last. Because we are picking at random, each individual fruit has an equal probability of being the last fruit. Out of the 60 total fruits,
+30 of them are peaches. Thus the probability the very last fruit is a peach is 30/60 or 1/2. We now need to find the probability that oranges are finished being picked after apples conditioned upon peaches being the last fruit picked from the basket. Between apples and oranges there are a total of 30 fruits, oranges being 20 of them, thus our conditional probability is P(a < o|p = 60) = 2/3. The joint probability of these outcomes is: 1/2 · 2/3 = 1/3
+
+Doing something similar for the case where we finish picking apples before peaches and peaches before oranges we get a probability of 1/3 of the last fruit being an orange and a probability of 3/4 of finishing apples before peaches when oranges are last giving us a joint probability of: 1/3 · 3/4 = 1/4
+
+The probability that either of these occur is the sum of these probabilities and so our answer is: 1/3 + 1/4 = 7/12",7/12,,,probability
+King of Hearts,"You take a standard shuffled deck of cards and keep flipping cards over until the first ace appears, which is card #14. What's the probability the next card is the king of hearts?","We know the 14th card must be an ace and the 13 cards that precede it can not be an ace. Thus we permute 13 of the 48 non-ace cards to be among the first 13, an ace to be in spot 14, and permute the remaining 38 cards to count the total number of possible selections.
+
+(48 choose 13)13! · (4 choose 1) · 38!
+
+To find the probability the 15th card is 8h we need to find the number of selections with Kh being in spot 15 while being a valid selection. We permute 13 of the 47 non-ace non-Kh cards for the first 13 spots, an ace for spot 14, the 8h for spot 15, and permute the remaining 37 cards to get:
+
+(47 choose 13)13! · (4 choose 1) · (1 choose 1) · 37!
+
+Putting this over the total number of possible selections we get:
+
+(47 choose 13)13! · (4 choose 1) · (1 choose 1) · 37! / (48 choose 13)13! · (4 choose 1) · 38! = 35/(48 · 38) = 35/1824",35/1824,,,probability
+Three Rings,"You are shooting arrows at a target with three rings: there is a circle with a 4 inch radius, a ring around it with an 8 inch radius, and a ring around that with a 12 inch radius. Each arrow hits the target somewhere uniformly at random.
+What's the probability that you land exactly one arrow in each of the three rings?","Let's denote the the event that the shot hits the inner ring as A, hits the middle ring as B, and the outer ring C. There are 3! = 6 ways to order the 3 shots such that one lands in each of the 3 rings (ABC, ACB, BAC, BCA, CAB, CBA).
+
+We can calculate the probability of each event A, B, and C using relative areas. The area of the total target space is 12²π. The area of A is 4²π. Therefore,
+
+P(A) = 4²π/12²π = 16/144 = 1/9.
+
+P(B) can be found by computing the area of only the second ring, and dividing by the area of the whole circle. The area of only the second ring is the area of the second circle minus the area of the inner circle: 8²π - 4²π = 48π. Dividing by the area of the whole target,
+12²π, we get
+
+P(B) = 12²π-8²π/12²π = 80/144 = 5/9.
+
+Lastly, P(C) is the area of the outer ring divided by the total area of the circle. By a similar approach to above, we determine this to be
+
+P(C) = 48/144 = 3/9.
+
+The probability of a given ordering, say ABC, is
+
+P(A) * P(B) * P(C) = 16/144 * 48/144 * 80/144 = 1/9 * 3/9 * 5/9 = 15/729
+
+We multiply across since each of the three shots are independent and successive events.
+
+Notice that regardless of the ordering of events, the product of the respective probabilities will be the same due to the commutative property of multiplication. Therefore, we multiply the number of ways to order the hitting of the three targets (6) by the probability of any ordering occurring: 6 * 15/729 = 90/729 = 0.1234 = 12.34%",0.1234,,,probability
+Highest Roll EV,"Jim will roll a fair, six-sided die until he gets a 4. What is the expected value of the highest number he rolls through this process?","Because you know Jim will eventually see a 4, the possible highest numbers are 4,
+5, and 6. Suppose k is the highest:
+
+P(k = 4) = 1/3 since you see 4,
+5,
+6 first with equal probability
+
+P(k = 6) = 1/2 since you will see 6 before 4 with probability 1/2
+
+P(k = 5) = 1/6 as only 1 of the 3! arrangements works in 5's favor (see 5 before 4 and 4 before 6)
+
+You can illustrate this further by writing out all 6 permutations and evaluating which number would be the greatest in that given scenario.
+
+E[k
+] = (1/3)(4) + (1/6)(5) + (1/2)(6) = 31/6",31/6,,,probability
+Race to Ace,What is the expected number of cards you need to draw from a 52-card deck before you see the first ace?,"Imagine you have the following setup:
+
+____A₁____A₂____A₃____A₄____
+
+Where Aₙ represents the nth Ace and the gaps represent the cards in between them.
+
+There are 48 cards to place into the 5 gaps, thus the expected number of cards per gap is 48/5. After picking all the cards from the first gap, the next card you pick would be an ace so the expected number of cards we pick until we get an ace is
+
+48/5 + 1 = 10.6",10.6,,,probability
+Spherical Coordinate Variance,"Randomly chose a coordinate (x, y, z) on the unit sphere. What is the variance of the z-coordinate?","Using the variance equation we get:
+
+Var(z) = E[z²] - E[z]²
+
+We know the equation of a the unit sphere is:
+
+x² + y² + z² = 1
+
+Since coordinates are uniformly and independently selected, the z² component will make roughly a third of this. Hence:
+
+E[z²] = 1/3
+
+To find E[z] we can imagine the unit sphere. The average of all coordinates will be in the exact center at (0,0,0), giving us our expected value of z. Therefore:
+
+E[z] = 0
+
+Var(z) = 1/3 - 0² = 1/3",1/3,,,probability
+Token Tussle,"Two players each start with 12 tokens. They roll three dice until the sum is either 11 or 14. If the sum is 14, player A gives a token to player B; if the sum is 11, player B gives a token to player A. They repeat this process until one player, the winner, has all the tokens. What is the probability that player A wins?","Let's generalize slightly and suppose that each player starts with a tokens and the probability of player A gaining a token on one turn is p.
+
+Let x be the number of A's tokens minus a. So the game begins with x = 0, and player A needs to reach x = a before reaching x = −a in order to win.
+
+We can view the game as a biased, absorbing random walk: x begins at zero, and at each step, x increases by one (with probability p) or decreases by 1 (with probability 1 − p) until x = a or x = −a.
+
+Let R_x be A's probability of winning when the number of A's tokens minus a is x. Then we know:
+
+R_a = 1 and R_-a = 0
+
+and
+
+R_n = pR_n+1 + (1 − p)R_n−1
+
+for −a < n < a. The equation above is an example of a linear recurrence relation, and we can solve for R_n as follows:
+
+pR_n+1 = R_n − (1−p)R_n−1
+
+and this has characteristic equation
+
+px^2 − x + 1−p = 0
+
+Let's assume p > 1/2. Then the two roots of this equation are a₁ = 1 and a₂ = (1−p)/p. Then there exist constants c₁ and c₂ such that:
+
+R_n = c₁a₁^n + c₂a₂^n
+
+with 0 = R_-a and 1 = R_a. Solving, we find c₁ = a₂^a/(a₂^2a−a₁^2a) and c₂ = −a₁^a/(a₂^2a−a₁^2a). We are interested in R₀ and we find:
+
+R₀ = c₁ + c₂ = 1/(a₁^a + a₂^a)
+
+For our particular problem, a = 12 and p = 9/14 (since the probabilities of throwing a sum of 11 and 14 with three dice are 1/8 and 5/72, respectively), so a₂ = 5/9 and so the probability of player A winning is:
+
+R₀ = 1/(1 + (5/9)^12) ≈ 0.99913631",0.99913631,,,probability
+Will It Stand?,Three legs are positioned uniformly and independently on the perimeter of a circular table. What is the probability the table will stand?,"The key to this problem is to realize that the table will only be stable if all 3 legs do not lie in a common semicircle, or the same 180° interval. To compute this probability, begin with 3 random points on a circle, and draw a semicircle from each point in the counterclockwise direction. For any given semicircle, there will be probability 1/2 · 1/2 the other 2 points fall into it. Since it is not possible for all the points to lie in more than one of the drawn semi-circles, these events are disjoint and so we can multiply the probabilities of each semi-circle containing all points to obtain the probability all points fall within 180° of each other. We take the complement of this value to determine the probability that all three points are not in the same semicircle, and thus the table will stand. Our answer is: 1 - 3 · 1/4 = 1/4",1/4,,,probability
+More Heads,"Alice and Bob each have a coin and flip it until they get a heads. If Bob flipped his coin more times than Alice, what is the expected number of times Alice flipped her coin?","Let's denote A as the number of times Alice flips her coin and B the number of times Bob flips his coin. We are given the condition A < B. Upon finding P(A < B) we can form our conditional expectations. By symmetry P(A < B) = P(B < A) so we see that:
+
+P(A < B) = (1 - P(A = B))/2
+
+There is a 1/2 · 1/2 chance both coins are flipped once,
+1/4 · 1/4 twice,
+1/8 · 1/8 three times and so on. Thus,
+
+P(A = B) = 1/4 + 1/16 + 1/64...
+
+→ 4P(A = B) = 1 + 1/4 + 1/16 + 1/64...
+
+Subtracting the top from bottom we see: 3P(A = B) = 1
+
+→ P(A = B) = 1/3
+
+Using this we compute:
+
+P(A < B) = (1 - 1/3)/2 = 1/3
+
+We can now compute P(A = n|A < B). If Alice flips her coin once, we know that she must get a heads on the first flip and Bob must get a tails on his first flip. If she flips her coin twice, she gets a heads followed by tails and Bob gets tails for his first two flips and so on. Our conditional expectations:
+
+E[A|A < B] = (1/2 · 1/2)/(1/3)(1) + (1/4 · 1/4)/(1/3)(2) + (1/8 · 1/8)/(1/3)(3)... = 3/4(1) + 3/16(2) + 3/64(3)...
+
+= 3/4(1) + 3/16(2) + 3/64(3)...
+
+We can compute 4E[A|A < B] - E[A|A < B] as:
+
+4E[A|A < B] = 3(1) + 3/4(2) + 3/16(3) + 3/64(4)...
+
+4E[A|A < B] - E[A|A < B] = 3E[A|A < B] = 3 + 3/4 + 3/16 + 3/64...
+
+Similarly we compute:
+
+12E[A|A < B] = 12 + 3 + 3/4 + 3/16 + 3/64...
+
+12E[A|A < B] - 3E[A|A < B] = 9E[A|A < B] = 12
+
+⟹ E[A|A < B] = 4/3",4/3,,,probability
+First Steps,"A baby is learning to walk with the assistance of its living room couch. The baby starts at the couch and at each given time the baby will make a decision. It will either take a brave step forward, stand in place not knowing what to do, or fearfully take a step back towards the couch with probabilities 0.2,
+0.5, and 0.3 respectively. The baby will never go behind the couch (so when at the couch the baby has probability 0.2 of moving forward and probability 0.8 of staying at the couch).
+If you were to observe this baby for an extremely long amount of time, what proportion of the time would the baby be at the couch?","Suppose we create a state diagram with states S₀, S₁, ...Sₙ where Sₙ represents the time a baby spends at the state n steps from the couch. Using our decision matrix [
+    0.2,
+    0.5,
+    0.3
+], we can map the state diagram of the baby. The baby will be at the couch, or S₀, after being at the S₀ in the previous state and standing still or moving back towards the couch from S₁. Thus,
+
+S₀ = 0.8S₀ + 0.3S₁
+
+Similarly, we get:
+
+S₁ = 0.2S₀ + 0.5S₁ + 0.3S₂
+S₂ = 0.2S₁ + 0.5S₂ + 0.3S₃
+S₃ = 0.2S₂ + 0.5S₃ + 0.3S₄
+⋮
+Sₙ = 0.2Sₙ₋₁ + 0.5Sₙ + 0.3Sₙ₊₁
+
+By simplifying these equations, we can identify a pattern:
+
+S₀ = 0.8S₀ + 0.3S₁ ⟶ S₀ = 1.5S₁
+
+Substituting in 1.5S₁ into our S₁ equation we get:
+
+S₁ = 0.2(1.5S₁) + 0.5S₁ + 0.3S₂ ⟶ S₁ = 1.5S₂
+
+It is evident that all subsequent state equations can be re-written as Sₙ = 1.5Sₙ₊₁ What that tells us is the baby will spend ²⁄₃ as much time in Sₙ₊₁ compared to Sₙ. We know that all these states must sum to one and have common ratio ²⁄₃. We can create the infinite geometric sum:
+
+S₀ + ²⁄₃S₀ + ⁴⁄₉S₀ + ... + (²⁄₃)ⁿS₀ = 1
+
+Upon multiplying the sum by ³⁄₂ we get:
+
+⁵⁄₂S₀ + ²⁄₃S₀ + ⁴⁄₉S₀... + (²⁄₃)ⁿ⁻¹S₀ = ³⁄₂
+
+Subtracting the first equation from the second gets us:
+
+³⁄₂S₀ = ¹⁄₂ ⟶ S₀ = ¹⁄₃
+
+Thus, the baby will be at the couch roughly ¹⁄₃ of the time.",1/3,,,probability
+3 Die Minimum,Suppose you roll three fair 100-sided die. What is the expected value of the lowest roll?,"Let's call the value of the minimum of the three die X. Using expectation by summation of survival we get:
+
+E[X] = ∑(k=1 to 100) P(X ≥ k)
+
+The probability that X is at least k is ((100-k+1)^3)/(100^3) so,
+
+E[X] = (100^3)/(100^3) + (99^3)/(100^3) + (98^3)/(100^3) + ... + (1^3)/(100^3)
+     = (1)/(100^3) · (100^3 + 99^3 + 98^3 + ... + 1^3)
+
+The sum of cubes from 1 to n can be rewritten to the square of the sum from 1 to n thus,
+
+E[X] = ((1 + 2 + 3 + ... + 100)^2)/(100^3)
+    ⟹ ∑(k=1 to 100) k = 100 · (1 + 100)/2 = 5050
+    ⟹ E[X] = (5050^2)/(100^3) = 25.5025",25.5025,,,probability
