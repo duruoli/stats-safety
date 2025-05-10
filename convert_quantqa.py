@@ -4,7 +4,7 @@ import pandas as pd
 from datasets import Dataset
 
 # Load the quant_qa.json file
-with open('quant_qa.json', 'r') as f:
+with open('data/quant_qa.json', 'r') as f:
     problems = f.read().split('``````')
 
 # Parse the problems into MathQA format
@@ -43,7 +43,7 @@ parsed_problems.reverse()
 df = pd.DataFrame(parsed_problems)
 
 # Save as jsonl format (one JSON object per line)
-with open('quant_qa_mathqa_format.jsonl', 'w') as f:
+with open('data/quant_qa_mathqa_format.jsonl', 'w') as f:
     for _, row in df.iterrows():
         f.write(json.dumps(row.to_dict()) + '\n')
 
@@ -62,5 +62,5 @@ print(json.dumps(parsed_problems[0], indent=2))
 print("\nData saved to quant_qa_mathqa_format.jsonl and quant_qa_dataset/")
 
 # Save as CSV for easier viewing
-df.to_csv("quant_qa_mathqa_format.csv", index=False)
+df.to_csv("data/quant_qa_mathqa_format.csv", index=False)
 print("Also saved as CSV at quant_qa_mathqa_format.csv")

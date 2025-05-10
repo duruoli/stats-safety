@@ -167,8 +167,8 @@ E(X²) = ∫₀¹ f(x)X²dx = ∫₀¹ 1 · X²dx = 1/3 X³|₀¹ = 1/3
 We can compute E(X)² in a similar way buy summing f(x)X and then squaring that result, but a simpler way would be to realize that the average result of a uniform distribution will just be its midpoint. Hence, E(X)² = (1/2)² = 1/4
 
 Var(X) = 1/3 - 1/4 = 1/12",1/12,,,probability
-Same Birthday,"If you have N people in a room, what is the likelihood that someone has the same birthday as you?","For this question, we will first compute the probability that nobody has the same birthday as us and then subtract it from 1. For computing the probability that nobody has the same birthday as us, there are 364^(N-1) possible samples of birthdays excluding our own. There are 365^(N-1) possible ways for the other guests to have birthdays. Our answer is: 1 - 364^(N-1)/365^(N-1)",1 - 364^(N-1)/365^(N-1),,,probability
-Same Birthday,"If you have N<=365 people in a room, what is the likelihood that at least 2 of them have the same birthday?","To solve this question, we can leverage the complement rule in probability. We must first calculate the probability that everyone has a unique birthday and then subtract it from one. There are P_N^365 = 365!/(365-N)! permutations for N people to have different birthdays. There are 365^N total birthday assignments for the N people. Therefore the answer is: 1 - P_N^365/365^N",1 - P_N^365/365^N,,,probability
+Same Birthday,"If you have 23 people in a room, what is the likelihood that someone has the same birthday as you?","For this question, we will first compute the probability that nobody has the same birthday as us and then subtract it from 1. For computing the probability that nobody has the same birthday as us, there are 364^(23-1) possible samples of birthdays excluding our own. There are 365^(23-1) possible ways for the other guests to have birthdays. Our answer is: 1 - 364^(23-1)/365^(23-1)",1 - 364^22/365^22,,,probability
+Same Birthday,"If you have 23 people in a room, what is the likelihood that at least 2 of them have the same birthday? Denote the permutation function as P(n, k) = n!/(n-k)!","To solve this question, we can leverage the complement rule in probability. We must first calculate the probability that everyone has a unique birthday and then subtract it from one. There are P(365, 23) = 365!/(365-23)! permutations for 23 people to have different birthdays. There are 365^23 total birthday assignments for the N people. Therefore the answer is: 1 - P(365, 23)/365^23","1 - P(365, 23)/365^23, 0.5073",,,probability
 Straight Shooter,"If we define a straight to be 5 cards with consecutive rank, not all sharing the same suit, what is the probability of being dealt a straight in a 5-card poker hand from a standard deck of cards?","Before I begin, here's some basic terminology and card basics:
 
 Rank: the 'number' of a card (Ace, 3, 7, King, etc)
@@ -249,7 +249,7 @@ To prove the above counting method is valid, here's an alternative implementatio
 
 As you can see, the number of ways to count valid hands is equivalent regardless of which rank we assign to be the quad or the single. This problem is not yet complete though because we are asked to compute the probability of drawing such a hand. Thus, we must divide the number of valid four-of-a-kinds by the number of possible poker hands. The number of valid poker hands is given by the number of ways to choose 5 cards from 52, namely (52 choose 5) or 2598960. Thus:
 
-P(4 of a kind) = 624/2598960 = 0.024%",624/2598960,,,probability
+P(4 of a kind) = 624/2598960 = 0.024%","624/2598960, 0.024%, 0.00024",,,probability
 Ascending Dice Rolls,You throw three fair dice consecutively. What is the probability that you obtain three numbers in strictly increasing order?,"To solve this problem, we can use conditional probability. Recall that P(A ∩ B) = P(A) × P(B | A). Let us define the following events:
 
 A - the event that we roll three different numbers
@@ -282,27 +282,27 @@ P(B) = 3 * ((3/4) * (1/4) * (1/4)) = 9/64
 Putting the two together we get:
 
 P(Median > 3) = P(A) + P(B) = 1/64 + 9/64 = 5/32",5/32,,,probability
-Perfect Samples,"Assume that you are taking samples of size s from a population. For each sample, let p represent the probability that every point in that sample is an inlier and let e represent the proportion of points in the sample that are outliers. Derive an equation in terms of s, p and e, to calculate the number of samples (N) needed in order to be 99% confident that there it at least one sample drawn that contains no outliers","The problem states that the proportion of points in a sample that are outliers is e, and therefore the proportion of points in the sample that are not outliers can be represented as 1 - e.
+Perfect Samples,"Assume that you are taking samples of size 3 from a population where 30% of the points are outliers. For each sample, you want every point to be an inlier (not an outlier). How many samples (N) do you need to collect to be 99% confident that at least one of your samples contains no outliers?","Let's define:
+- e = 0.3 (proportion of outliers in the population)
+- s = 3 (sample size)
+- p = 0.99 (confidence level)
 
-Since we want to be 99% confident that we get at least one sample that is completely void of outliers, we want to make the P(Every Sample Contains Outlier) ≤ 0.01
+For a single sample, the probability that a specific point is an inlier is (1-e) = 0.7.
+The probability that all 3 points in the sample are inliers is (1-e)^s = 0.7^3 = 0.343.
 
-P(Sample Contains 0 Outliers) = (1 - e)^s
+Therefore, the probability that a sample contains at least one outlier is 1-(1-e)^s = 1-0.343 = 0.657.
 
-P(Sample Contains at Least 1 Outlier) = (1 - (1 - e)^s)
+If we take N samples, the probability that all N samples contain at least one outlier is (0.657)^N.
 
-P(All Samples Contain at Least 1 Outlier) = (1 - (1 - e)^s)^N
+We want this probability to be at most 1-p = 0.01:
+(0.657)^N ≤ 0.01
 
-P(All Samples Contain at Least 1 Outlier) ≤ (1 - p)
+Taking logarithms of both sides:
+N·log(0.657) ≤ log(0.01)
+N ≥ log(0.01)/log(0.657)
+N ≥ 10.95
 
-(1 - (1 - e)^s)^N ≤ (1 - p)
-
-Finally, we've arrived at an equation that restricts the probability that all the samples contain an outlier to less than 1%. Finally, we can solve for N to find the number of samples we would need:
-
-(1 - (1 - e)^s)^N ≤ (1 - p)
-
-N > log(1 - p)/log(1 - (1 - e^s))
-
-N > log(1 - 0.99)/log(1 - (1 - e^s))",log(1 - 0.99)/log(1 - (1 - e^s)),,,probability
+Since we need a whole number of samples, we round up to 11.",11,,,probability
 Find the Money Box,"There are five boxes: one with $150, the rest are empty. At any time, you may pay X dollars to open one of the boxes and keep the contents. Assuming you continue paying until you find the box with the money, what is the value X (in dollars) that makes the game fair?","Since there is no way to know in advance which box contains the $150, each box is equally likely to contain the money. The probability of finding the money in each box is 1/5.
 
 The expected number of boxes opened before finding the $150 can be calculated using the concept of expectation for discrete random variables.
@@ -325,24 +325,15 @@ For the game to be fair, the expected cost should equal the expected reward. The
 
 Total expected cost = Expected reward
 3X = 150
-X = 50",$50 or 50 dollars,,,probability
-Subtree Removal,"You are given a rooted tree. On each step, you randomly choose a node and remove the subtree rooted by that node, and the node itself, until all subtrees have been removed and only the root remains. Find the expected number of steps in this process.","Every node in the tree has an equal probability of being selected. If a node is to be removed, we know that either the node itself, or one of the node's ancestors must have been chosen.
+X = 50",50,,,probability
+Subtree Removal,"You are given a rooted tree with 7 nodes as follows: A root node R with two children A and B. Node A has two children C and D. Node B has two children E and F. On each step, you randomly choose a node and remove the subtree rooted at that node (NOT including the chosen node itself). This process continues until only the root R remains. Find the expected number of steps in this process.","Let's apply the formula for expected steps, which is the sum of 1/d_i for each node i (except for the root), where d_i is the depth of node i (with the root at depth 0).
 
-The number of ancestors of a node i is Depth[i]
+For our tree:
+- Root R: depth = 0, contribution = 0
+- Nodes A and B: depth = 1, contribution = 1/1 + 1/1 = 2
+- Nodes C, D, E, and F: depth = 2, contribution = 1/2 + 1/2 + 1/2 + 1/2 = 2
 
-P(i is removed) = Depth[i] / Size of Tree
-P(i is chosen) = 1 / Size of Tree
-P(i is removed | i is chosen) = 1
-
-We can use Bayes theorem to solve this problem where: P(A|B) = P(B|A)*P(A)/P(B) and therefore
-P(i is chosen | i is removed) = 1/Depth[i]
-
-We now use Linearity of Expectation to find the expected number of subtree removals. Define indicator variable X_i = 1 if i node was chosen.
-
-X = X₁ + X₂...X_n
-E[X] = ∑ᵢ₌₁ⁿ E[X_i]
-E[X] = ∑ 1 * P(X_i was chosen |i was removed)
-E[X] = ∑ᵢ₌₁ⁿ 1/Depth[i]",∑ᵢ₌₁ⁿ 1/Depth[i],,,probability
+Total expected number of steps = 2 + 2 = 4",4,,,probability
 Semi-Working Gum Machine,"You and two other friends get gum from a semi-functioning gum machine. This machine will pop out a stick of gum with a length from the interval [0,3] independently and uniformly. Of the 3 sticks, you will receive the shortest one. What is the probability the length of your gum stick is between 1 and 2?","If the minimum length is between 1 and 2, all sticks must be at least 1 long. This occurs with probability (2/3)³. However, this includes the instance where all sticks of gum are longer than 2. Subtracting this case we get our probability to be:
 
 (2/3)³ - (1/3)³ = 7/27",7/27,,,probability
@@ -478,7 +469,7 @@ Simplifying:
 -x/6 > -35/6
 x < 35
 
-35 is the indifference point, thus we should roll for every value before it and keep all values above it.",x < 35,,,probability
+35 is the indifference point, thus we should roll for every value before it and keep all values above it.",35,,,probability
 Repeated Rolling,"Suppose a game has you roll a fair six-sided die repeatedly, until you first encounter a number which has previously appeared. Let r denote number of times the die was rolled, and p_r the probability of rolling r times. Calculate p_3.","In order for r to equal 1, the first roll would have to be a value that had already been rolled. Since this cannot occur, p₁ = 0
 
 For r to equal 2, the game must terminate on the second roll, meaning the second roll would have to equal the value of the first roll. For a given value x of the first roll, the probability that the second roll also shows x, is 1/6, seeing as how we're rolling a fair die.
@@ -510,7 +501,7 @@ Gone Fishing,"A bear wants to catch 3 fish from a river. Upon catching 3 fish th
 P(F) = ((4 choose 0)(1/2)^4 + (4 choose 1)(1/2)^4 + (4 choose 2)(1/2)^4) = 11/16
 
 We know the bear will catch the fifth fish half the time when it is fishing for it. This corresponds to the probability 11/16 * 1/2. However, we are looking to compute the probability that the fifth fish is not caught. The probability the fifth fish is not caught is simply the complement of this event and so we get: 1 - (11/16 · 1/2) = 1 - 11/32 = 21/32",21/32,,,probability
-The Lucky Door,"You're on a gameshow and are tasked to choose the lucky door. Behind 1 door is $10,000. The remaining four have nothing. How much are you expected to win?","The probability you select the correct door is 1/5. Your prize when you select the door is $10,000. Thus your expected earnings of this game is 1/5 · 10,000 = $2,000","$2,000 or 2000 dollars",,,probability
+The Lucky Door,"You're on a gameshow and are tasked to choose the lucky door. Behind 1 door is $10,000. The remaining four have nothing. How much are you expected to win?","The probability you select the correct door is 1/5. Your prize when you select the door is $10,000. Thus your expected earnings of this game is 1/5 · 10,000 = $2,000",2000,,,probability
 Odd Flips,"Suppose you flip a fair coin 1,
 000 times. What is the probability you observe an odd number of heads?","The simplest way to think of this problem is to realize everything is contingent on the final flip. If you have an odd number of heads after 999 flips, you will need a tails on the last flip to maintain an odd count. If you have an even number of heads after 999 flips, you will need a heads on the last flip to create an odd count. Regardless of what you have, the desired side will occur with p = 1/2.
 
@@ -522,7 +513,7 @@ How much would you be willing to play this game?","The only cards that have an e
 
 You lose the game if the Joker comes before any one of these three royal cards, so the probability of you winning is the same as the probability the Joker is selected last among these cards. The probability any 1 of the 4 cards is last is 1/4.
 
-Your expected earnings from playing this game is 1/4 · 100 = $25, so you should be willing to pay up to $25 dollars for this game.",$25 or 25 dollars,,,probability
+Your expected earnings from playing this game is 1/4 · 100 = $25, so you should be willing to pay up to $25 dollars for this game.",25,,,probability
 Exactly 6,"If I roll a dice 36 times, what is the probability that each number appears exactly 6 times?","To solve this question, we can leverage the multinomial theorem. This theorem states that for an experiment with n trials, with k possible results and x₁, ..., xₖ desired outcomes corresponding to each of the possible results, the number of possible experimental outcomes is given by the following formula: (n choose x₁,...,xₖ) = n!/(x₁!...xₖ!)
 
 We know that the probability of any face from the dice showing up is 1/6 and that we are rolling the dice 36 times. Therefore, we have the solution given below:

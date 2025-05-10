@@ -680,7 +680,7 @@ Reasoning: The only cards that have an effect on the outcome of the game are the
 You lose the game if the Joker comes before any one of these three royal cards, so the probability of you winning is the same as the probability the Joker is selected last among these cards. The probability any 1 of the 4 cards is last is 1/4.
 
 Your expected earnings from playing this game is 1/4 · 100 = $25, so you should be willing to pay up to $25 dollars for this game.
-Answer: $25 or 25 dollars
+Answer: 25
 
 ``````
 Name: Odd Flips
@@ -696,7 +696,7 @@ Answer: 1/2
 Name: The Lucky Door
 Question: You're on a gameshow and are tasked to choose the lucky door. Behind 1 door is $10,000. The remaining four have nothing. How much are you expected to win?
 Reasoning: The probability you select the correct door is 1/5. Your prize when you select the door is $10,000. Thus your expected earnings of this game is 1/5 · 10,000 = $2,000
-Answer: $2,000 or 2000 dollars
+Answer: 2000
 
 ``````
 Name: Gone Fishing
@@ -780,7 +780,7 @@ Simplifying:
 x < 35
 
 35 is the indifference point, thus we should roll for every value before it and keep all values above it.
-Answer: x < 35
+Answer: 35
 
 ``````
 Name: Lucky Bubble
@@ -953,25 +953,17 @@ Answer: 7/27
 
 ``````
 Name: Subtree Removal
-Question: You are given a rooted tree. On each step, you randomly choose a node and remove the subtree rooted by that node, and the node itself, until all subtrees have been removed and only the root remains. Find the expected number of steps in this process.
-Reasoning: Every node in the tree has an equal probability of being selected. If a node is to be removed, we know that either the node itself, or one of the node's ancestors must have been chosen.
+Question: You are given a rooted tree with 7 nodes as follows: A root node R with two children A and B. Node A has two children C and D. Node B has two children E and F. On each step, you randomly choose a node and remove the subtree rooted at that node (NOT including the chosen node itself). This process continues until only the root R remains. Find the expected number of steps in this process.
+Reasoning: Let's apply the formula for expected steps, which is the sum of 1/d_i for each node i (except for the root), where d_i is the depth of node i (with the root at depth 0).
 
-The number of ancestors of a node i is Depth[i]
+For our tree:
+- Root R: depth = 0, contribution = 0
+- Nodes A and B: depth = 1, contribution = 1/1 + 1/1 = 2
+- Nodes C, D, E, and F: depth = 2, contribution = 1/2 + 1/2 + 1/2 + 1/2 = 2
 
-P(i is removed) = Depth[i] / Size of Tree
-P(i is chosen) = 1 / Size of Tree
-P(i is removed | i is chosen) = 1
+Total expected number of steps = 2 + 2 = 4
 
-We can use Bayes theorem to solve this problem where: P(A|B) = P(B|A)*P(A)/P(B) and therefore
-P(i is chosen | i is removed) = 1/Depth[i]
-
-We now use Linearity of Expectation to find the expected number of subtree removals. Define indicator variable X_i = 1 if i node was chosen.
-
-X = X₁ + X₂...X_n
-E[X] = ∑ᵢ₌₁ⁿ E[X_i]
-E[X] = ∑ 1 * P(X_i was chosen |i was removed)
-E[X] = ∑ᵢ₌₁ⁿ 1/Depth[i]
-Answer: ∑ᵢ₌₁ⁿ 1/Depth[i]
+Answer: 4
 
 ``````
 Name: Find the Money Box
@@ -999,33 +991,34 @@ For the game to be fair, the expected cost should equal the expected reward. The
 Total expected cost = Expected reward
 3X = 150
 X = 50
-Answer: $50 or 50 dollars
+Answer: 50
 
 ``````
 Name: Perfect Samples
-Question: Assume that you are taking samples of size s from a population. For each sample, let p represent the probability that every point in that sample is an inlier and let e represent the proportion of points in the sample that are outliers. Derive an equation in terms of s, p and e, to calculate the number of samples (N) needed in order to be 99% confident that there it at least one sample drawn that contains no outliers
-Reasoning: The problem states that the proportion of points in a sample that are outliers is e, and therefore the proportion of points in the sample that are not outliers can be represented as 1 - e.
+Question: Assume that you are taking samples of size 3 from a population where 30% of the points are outliers. For each sample, you want every point to be an inlier (not an outlier). How many samples (N) do you need to collect to be 99% confident that at least one of your samples contains no outliers?
+Reasoning: Let's define:
+- e = 0.3 (proportion of outliers in the population)
+- s = 3 (sample size)
+- p = 0.99 (confidence level)
 
-Since we want to be 99% confident that we get at least one sample that is completely void of outliers, we want to make the P(Every Sample Contains Outlier) ≤ 0.01
+For a single sample, the probability that a specific point is an inlier is (1-e) = 0.7.
+The probability that all 3 points in the sample are inliers is (1-e)^s = 0.7^3 = 0.343.
 
-P(Sample Contains 0 Outliers) = (1 - e)^s
+Therefore, the probability that a sample contains at least one outlier is 1-(1-e)^s = 1-0.343 = 0.657.
 
-P(Sample Contains at Least 1 Outlier) = (1 - (1 - e)^s)
+If we take N samples, the probability that all N samples contain at least one outlier is (0.657)^N.
 
-P(All Samples Contain at Least 1 Outlier) = (1 - (1 - e)^s)^N
+We want this probability to be at most 1-p = 0.01:
+(0.657)^N ≤ 0.01
 
-P(All Samples Contain at Least 1 Outlier) ≤ (1 - p)
+Taking logarithms of both sides:
+N·log(0.657) ≤ log(0.01)
+N ≥ log(0.01)/log(0.657)
+N ≥ 10.95
 
-(1 - (1 - e)^s)^N ≤ (1 - p)
+Since we need a whole number of samples, we round up to 11.
 
-Finally, we've arrived at an equation that restricts the probability that all the samples contain an outlier to less than 1%. Finally, we can solve for N to find the number of samples we would need:
-
-(1 - (1 - e)^s)^N ≤ (1 - p)
-
-N > log(1 - p)/log(1 - (1 - e^s))
-
-N > log(1 - 0.99)/log(1 - (1 - e^s))
-Answer: log(1 - 0.99)/log(1 - (1 - e^s))
+Answer: 11
 
 ``````
 Name: Median Probability
@@ -1079,7 +1072,7 @@ To prove the above counting method is valid, here's an alternative implementatio
 As you can see, the number of ways to count valid hands is equivalent regardless of which rank we assign to be the quad or the single. This problem is not yet complete though because we are asked to compute the probability of drawing such a hand. Thus, we must divide the number of valid four-of-a-kinds by the number of possible poker hands. The number of valid poker hands is given by the number of ways to choose 5 cards from 52, namely (52 choose 5) or 2598960. Thus:
 
 P(4 of a kind) = 624/2598960 = 0.024%
-Answer: 624/2598960
+Answer: 624/2598960, 0.024%, 0.00024
 
 ``````
 Name: Expected Value of Highest Die
@@ -1178,15 +1171,15 @@ Answer: 10(4^5 - 4)/(52 choose 5)
 
 ``````
 Name: Same Birthday
-Question: If you have N<=365 people in a room, what is the likelihood that at least 2 of them have the same birthday?
-Reasoning: To solve this question, we can leverage the complement rule in probability. We must first calculate the probability that everyone has a unique birthday and then subtract it from one. There are P_N^365 = 365!/(365-N)! permutations for N people to have different birthdays. There are 365^N total birthday assignments for the N people. Therefore the answer is: 1 - P_N^365/365^N
-Answer: 1 - P_N^365/365^N
+Question: If you have 23 people in a room, what is the likelihood that at least 2 of them have the same birthday? Denote the permutation function as P(n, k) = n!/(n-k)!
+Reasoning: To solve this question, we can leverage the complement rule in probability. We must first calculate the probability that everyone has a unique birthday and then subtract it from one. There are P(365, 23) = 365!/(365-23)! permutations for 23 people to have different birthdays. There are 365^23 total birthday assignments for the N people. Therefore the answer is: 1 - P(365, 23)/365^23
+Answer: 1 - P(365, 23)/365^23, 0.5073
 
 ``````
 Name: Same Birthday
-Question: If you have N people in a room, what is the likelihood that someone has the same birthday as you?
-Reasoning: For this question, we will first compute the probability that nobody has the same birthday as us and then subtract it from 1. For computing the probability that nobody has the same birthday as us, there are 364^(N-1) possible samples of birthdays excluding our own. There are 365^(N-1) possible ways for the other guests to have birthdays. Our answer is: 1 - 364^(N-1)/365^(N-1)
-Answer: 1 - 364^(N-1)/365^(N-1)
+Question: If you have 23 people in a room, what is the likelihood that someone has the same birthday as you?
+Reasoning: For this question, we will first compute the probability that nobody has the same birthday as us and then subtract it from 1. For computing the probability that nobody has the same birthday as us, there are 364^(23-1) possible samples of birthdays excluding our own. There are 365^(23-1) possible ways for the other guests to have birthdays. Our answer is: 1 - 364^(23-1)/365^(23-1)
+Answer: 1 - 364^22/365^22
 
 ``````
 Name: Find the Variance
